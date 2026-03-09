@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MapLibre App</title>
+
+  <!-- MapLibre GL JS -->
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <!-- コントロールパネル -->
+  <div id="panel">
+    <h2>MapLibre App</h2>
+
+    <div class="control-group">
+      <label for="style-select">スタイル</label>
+      <select id="style-select">
+        <option value="https://demotiles.maplibre.org/style.json">MapLibre Demo</option>
+        <option value="https://tile.openstreetmap.jp/styles/osm-bright/style.json">OSM Bright (Japan)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label>現在地へ移動</label>
+      <button id="btn-geolocate">現在地</button>
+    </div>
+
+    <div class="control-group">
+      <label>日本の主要都市</label>
+      <div class="city-buttons">
+        <button class="city-btn" data-lng="139.6917" data-lat="35.6895" data-zoom="10">東京</button>
+        <button class="city-btn" data-lng="135.5022" data-lat="34.6937" data-zoom="10">大阪</button>
+        <button class="city-btn" data-lng="130.4017" data-lat="33.5904" data-zoom="10">福岡</button>
+        <button class="city-btn" data-lng="141.3544" data-lat="43.0621" data-zoom="10">札幌</button>
+      </div>
+    </div>
+
+    <div id="coords" class="info-box">
+      <span id="lng-lat">---</span><br />
+      Zoom: <span id="zoom-level">---</span>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
