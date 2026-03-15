@@ -1,6 +1,6 @@
 // ---- 初期設定 ----
-const INITIAL_CENTER = [136.9066, 35.1802]; // 日本の中心付近（名古屋）
-const INITIAL_ZOOM = 5;
+const INITIAL_CENTER = [139.6380, 35.4437]; // 横浜
+const INITIAL_ZOOM = 14;
 const INITIAL_STYLE = 'https://demotiles.maplibre.org/style.json';
 
 // ---- マップ初期化 ----
@@ -26,7 +26,14 @@ function updateCoords() {
 }
 
 map.on('move', updateCoords);
-map.on('load', updateCoords);
+
+// ---- マップ読み込み完了時 ----
+map.on('load', () => {
+  updateCoords();
+  initLayers(map);  // layers.js
+  initSearch(map);  // search.js
+  initMeasure(map); // measure.js
+});
 
 // ---- スタイル切り替え ----
 document.getElementById('style-select').addEventListener('change', (e) => {
@@ -62,8 +69,20 @@ document.querySelectorAll('.city-btn').forEach((btn) => {
   });
 });
 
-// ---- クリックでポップアップ ----
+// ---- 背景クリックでポップアップ（フィーチャーをクリックしていない場合のみ）----
 map.on('click', (e) => {
+  // フィーチャークリックは layers.js 側で preventDefault() しているが、
+  // MapLibre では click イベントは必ず発火するので、featuresAt で判定する
+  if (e.defaultPrevented) return;
+
+  const features = map.queryRenderedFeatures(e.point);
+  const interactiveLayers = [
+    'hydrants-public', 'hydrants-private', 'water-tanks',
+    'districts-fill', 'hazard-zones-fill',
+  ];
+  const hitFeature = features.find((f) => interactiveLayers.includes(f.layer.id));
+  if (hitFeature) return; // フィーチャー上はスキップ
+
   new maplibregl.Popup({ closeOnClick: true })
     .setLngLat(e.lngLat)
     .setHTML(

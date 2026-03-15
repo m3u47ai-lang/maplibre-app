@@ -1,0 +1,53 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6355, 35.4460] },
+      "properties": {
+        "type": "公設防火水槽", "id": "T-001", "address": "横浜市中区本町5",
+        "capacity": 40, "year": 2009, "inspection": "正常", "note": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6415, 35.4445] },
+      "properties": {
+        "type": "公設防火水槽", "id": "T-002", "address": "横浜市中区山下町30",
+        "capacity": 60, "year": 2013, "inspection": "正常", "note": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6390, 35.4410] },
+      "properties": {
+        "type": "公設防火水槽", "id": "T-003", "address": "横浜市中区日本大通8",
+        "capacity": 40, "year": 2006, "inspection": "要注意", "note": "老朽化のため改修検討中"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6335, 35.4475] },
+      "properties": {
+        "type": "公設防火水槽", "id": "T-004", "address": "横浜市中区北仲通1",
+        "capacity": 100, "year": 2019, "inspection": "正常", "note": "大容量水槽"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6460, 35.4470] },
+      "properties": {
+        "type": "公設防火水槽", "id": "T-005", "address": "横浜市中区新港3",
+        "capacity": 40, "year": 2011, "inspection": "正常", "note": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6315, 35.4420] },
+      "properties": {
+        "type": "公設防火水槽", "id": "T-006", "address": "横浜市西区みなとみらい2",
+        "capacity": 60, "year": 2017, "inspection": "正常", "note": ""
+      }
+    }
+  ]
+}

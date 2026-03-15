@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MapLibre App</title>
+  <title>消防業務支援マップ</title>
 
   <!-- MapLibre GL JS -->
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+  <!-- turf.js（距離・面積計算） -->
+  <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -15,9 +18,28 @@
 
   <div id="map"></div>
 
-  <!-- コントロールパネル -->
+  <!-- 住所・キーワード検索バー（上部中央）-->
+  <div id="search-bar">
+    <input id="search-input" type="text" placeholder="住所・施設名・管理番号で検索..." />
+    <button id="search-btn">検索</button>
+    <button id="search-clear-btn" title="クリア">✕</button>
+  </div>
+
+  <!-- レイヤ表示制御パネル（左側）-->
+  <div id="layer-panel">
+    <h3>レイヤ表示</h3>
+    <div id="layer-groups"></div>
+  </div>
+
+  <!-- 計測ボタン（左下）-->
+  <button id="measure-btn" title="距離・面積を計測">📏 計測</button>
+
+  <!-- 計測結果表示（下部中央）-->
+  <div id="measure-result" style="display:none;"></div>
+
+  <!-- コントロールパネル（右側）-->
   <div id="panel">
-    <h2>MapLibre App</h2>
+    <h2>消防業務支援マップ</h2>
 
     <div class="control-group">
       <label for="style-select">スタイル</label>
@@ -33,12 +55,12 @@
     </div>
 
     <div class="control-group">
-      <label>日本の主要都市</label>
+      <label>主要都市</label>
       <div class="city-buttons">
+        <button class="city-btn" data-lng="139.6380" data-lat="35.4437" data-zoom="14">横浜</button>
         <button class="city-btn" data-lng="139.6917" data-lat="35.6895" data-zoom="10">東京</button>
         <button class="city-btn" data-lng="135.5022" data-lat="34.6937" data-zoom="10">大阪</button>
-        <button class="city-btn" data-lng="130.4017" data-lat="33.5904" data-zoom="10">福岡</button>
-        <button class="city-btn" data-lng="141.3544" data-lat="43.0621" data-zoom="10">札幌</button>
+        <button class="city-btn" data-lng="136.9066" data-lat="35.1802" data-zoom="10">名古屋</button>
       </div>
     </div>
 
@@ -48,6 +70,9 @@
     </div>
   </div>
 
+  <script src="layers.js"></script>
+  <script src="search.js"></script>
+  <script src="measure.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
