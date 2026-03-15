@@ -37,6 +37,23 @@
   <!-- 計測結果表示（下部中央）-->
   <div id="measure-result" style="display:none;"></div>
 
+  <!-- 動態情報バー（上部左）-->
+  <div id="vehicle-bar">
+    <span id="vehicle-updated">車両動態: 読込中...</span>
+    <button id="vehicle-polling-btn" class="active">⏸ 更新停止</button>
+  </div>
+
+  <!-- 災害受信票モーダル -->
+  <div id="incident-modal" style="display:none;">
+    <div id="incident-modal-inner">
+      <div id="incident-modal-header">
+        <span>災害受信票</span>
+        <button id="incident-modal-close">✕</button>
+      </div>
+      <div id="incident-modal-body"></div>
+    </div>
+  </div>
+
   <!-- コントロールパネル（右側）-->
   <div id="panel">
     <h2>消防業務支援マップ</h2>
@@ -64,6 +81,19 @@
       </div>
     </div>
 
+    <div class="control-group">
+      <label>受信票表示</label>
+      <button id="toggle-completed-btn">完了事案を非表示</button>
+    </div>
+
+    <div class="control-group">
+      <label>
+        水利障害
+        <span id="obstacle-badge" class="badge">0</span>
+      </label>
+      <div id="obstacle-summary" class="info-box obstacle-info">読込中...</div>
+    </div>
+
     <div id="coords" class="info-box">
       <span id="lng-lat">---</span><br />
       Zoom: <span id="zoom-level">---</span>
@@ -73,6 +103,9 @@
   <script src="layers.js"></script>
   <script src="search.js"></script>
   <script src="measure.js"></script>
+  <script src="vehicles.js"></script>
+  <script src="incidents.js"></script>
+  <script src="obstacles.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
