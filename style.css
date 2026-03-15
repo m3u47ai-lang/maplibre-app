@@ -596,3 +596,167 @@ button:disabled {
 .obstacle-info small {
   color: #e07020;
 }
+
+/* ---- Phase 3: 分析ボタン群（左下）---- */
+
+#analysis-btns {
+  position: absolute;
+  bottom: 110px;
+  left: 10px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#analysis-btns button {
+  padding: 7px 14px;
+  font-size: 0.82rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  text-align: left;
+}
+
+#analysis-btns button.active {
+  background: #e63946;
+}
+
+#analysis-btns button.active:hover {
+  background: #c1121f;
+}
+
+/* ---- Phase 3: 出張所ピックアップ結果 ---- */
+
+#pickup-result {
+  position: absolute;
+  bottom: 110px;
+  left: 220px;
+  z-index: 10;
+  background: rgba(255,255,255,0.97);
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-width: 200px;
+  max-width: 260px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  font-size: 0.82rem;
+}
+
+.pickup-header {
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: #4361ee;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+}
+
+.pickup-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 3px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.pickup-row:last-child { border-bottom: none; }
+
+.pickup-name {
+  color: #1a1a2e;
+  font-size: 0.82rem;
+}
+
+.pickup-dist {
+  color: #ff6600;
+  font-weight: 700;
+  font-size: 0.78rem;
+  font-family: monospace;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.pickup-empty {
+  color: #aaa;
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 8px 0;
+}
+
+#pickup-clear-btn {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 4px;
+  font-size: 0.78rem;
+  background: #f0f0f0;
+  color: #555;
+  border-radius: 4px;
+}
+
+#pickup-clear-btn:hover { background: #e0e0e0; }
+
+/* ---- Phase 3: 火災分析パネル（右側スライドイン）---- */
+
+#stats-panel {
+  position: absolute;
+  top: 0;
+  right: -320px; /* 初期は隠れている */
+  width: 300px;
+  height: 100vh;
+  background: rgba(255,255,255,0.98);
+  box-shadow: -4px 0 16px rgba(0,0,0,0.15);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+}
+
+#stats-panel.open {
+  right: 0;
+}
+
+.stats-panel-header {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 14px 16px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  flex-shrink: 0;
+}
+
+.stats-filter-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e8e8e8;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.stats-filter-row select {
+  flex: 1;
+  min-width: 80px;
+  padding: 5px 8px;
+  font-size: 0.82rem;
+}
+
+.stats-count {
+  font-weight: 700;
+  color: #e63946;
+  font-size: 0.88rem;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.chart-wrap {
+  padding: 12px 14px;
+  height: 200px;
+  flex-shrink: 0;
+}
+
+.chart-wrap-sm {
+  height: 180px;
+}

@@ -33,9 +33,11 @@ map.on('load', () => {
   initLayers(map);    // layers.js (F-01/02/03/05)
   initSearch(map);    // search.js (F-04)
   initMeasure(map);   // measure.js (F-06)
-  initVehicles(map);  // vehicles.js (F-08)
-  initIncidents(map); // incidents.js (F-09)
-  initObstacles(map); // obstacles.js (F-10)
+  initVehicles(map);   // vehicles.js (F-08)
+  initIncidents(map);  // incidents.js (F-09)
+  initObstacles(map);  // obstacles.js (F-10)
+  initAnalysis(map);   // analysis.js (F-11/12)
+  initFireStats(map);  // fire-stats.js (F-13)
   updateObstacleSummary();
 });
 
@@ -98,6 +100,7 @@ map.on('click', (e) => {
     'hydrants-public', 'hydrants-private', 'water-tanks',
     'districts-fill', 'hazard-zones-fill',
     'vehicles-symbol', 'incidents-symbol', 'obstacles-symbol',
+    'stations-circle', 'fire-point', 'fire-cluster',
   ];
   const hitFeature = features.find((f) => interactiveLayers.includes(f.layer.id));
   if (hitFeature) return; // フィーチャー上はスキップ

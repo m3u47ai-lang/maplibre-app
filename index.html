@@ -12,6 +12,9 @@
   <!-- turf.js（距離・面積計算） -->
   <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
 
+  <!-- Chart.js（グラフ描画） -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -33,6 +36,42 @@
 
   <!-- 計測ボタン（左下）-->
   <button id="measure-btn" title="距離・面積を計測">📏 計測</button>
+
+  <!-- 分析ボタン群（左下・計測ボタンの上）-->
+  <div id="analysis-btns">
+    <button id="pickup-btn">📍 出張所ピックアップ</button>
+    <button id="heatmap-btn">🔥 水利ヒートマップ</button>
+    <button id="stats-btn">📊 火災分析</button>
+  </div>
+
+  <!-- 出張所ピックアップ結果パネル（左下）-->
+  <div id="pickup-result" style="display:none;">
+    <button id="pickup-clear-btn">✕ クリア</button>
+  </div>
+
+  <!-- 火災分析パネル（右側・スライドイン）-->
+  <div id="stats-panel">
+    <div class="stats-panel-header">
+      <span>📊 火災調査分析</span>
+    </div>
+    <div class="stats-filter-row">
+      <select id="fire-filter-year">
+        <option value="all">全期間</option>
+      </select>
+      <select id="fire-filter-month">
+        <option value="all">全月</option>
+        <option value="01">1月</option><option value="02">2月</option>
+        <option value="03">3月</option><option value="04">4月</option>
+        <option value="05">5月</option><option value="06">6月</option>
+        <option value="07">7月</option><option value="08">8月</option>
+        <option value="09">9月</option><option value="10">10月</option>
+        <option value="11">11月</option><option value="12">12月</option>
+      </select>
+      <span id="fire-summary-count" class="stats-count">0 件</span>
+    </div>
+    <div class="chart-wrap"><canvas id="fire-chart"></canvas></div>
+    <div class="chart-wrap chart-wrap-sm"><canvas id="fire-cause-chart"></canvas></div>
+  </div>
 
   <!-- 計測結果表示（下部中央）-->
   <div id="measure-result" style="display:none;"></div>
@@ -106,6 +145,8 @@
   <script src="vehicles.js"></script>
   <script src="incidents.js"></script>
   <script src="obstacles.js"></script>
+  <script src="analysis.js"></script>
+  <script src="fire-stats.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

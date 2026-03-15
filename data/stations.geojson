@@ -1,0 +1,40 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6382, 35.4501] },
+      "properties": { "id": "ST-01", "name": "中消防署", "address": "横浜市中区住吉町4-42", "tel": "045-xxx-0001", "vehicles": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6448, 35.4472] },
+      "properties": { "id": "ST-02", "name": "中消防署 山下出張所", "address": "横浜市中区山下町12", "tel": "045-xxx-0002", "vehicles": 3 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6298, 35.4542] },
+      "properties": { "id": "ST-03", "name": "西消防署", "address": "横浜市西区高島2-7", "tel": "045-xxx-0003", "vehicles": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6185, 35.4612] },
+      "properties": { "id": "ST-04", "name": "西消防署 戸部出張所", "address": "横浜市西区戸部本町3-1", "tel": "045-xxx-0004", "vehicles": 3 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6550, 35.4385] },
+      "properties": { "id": "ST-05", "name": "中消防署 本牧出張所", "address": "横浜市中区本牧原1-1", "tel": "045-xxx-0005", "vehicles": 3 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6090, 35.4480] },
+      "properties": { "id": "ST-06", "name": "西消防署 浅間出張所", "address": "横浜市西区浅間町4-160", "tel": "045-xxx-0006", "vehicles": 2 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6690, 35.4310] },
+      "properties": { "id": "ST-07", "name": "南消防署 磯子出張所", "address": "横浜市磯子区磯子1-1", "tel": "045-xxx-0007", "vehicles": 3 }
+    }
+  ]
+}
