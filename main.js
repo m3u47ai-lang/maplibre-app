@@ -30,9 +30,13 @@ map.on('move', updateCoords);
 // ---- マップ読み込み完了時 ----
 map.on('load', () => {
   updateCoords();
-  initLayers(map);  // layers.js
-  initSearch(map);  // search.js
-  initMeasure(map); // measure.js
+  initLayers(map);    // layers.js (F-01/02/03/05)
+  initSearch(map);    // search.js (F-04)
+  initMeasure(map);   // measure.js (F-06)
+  initVehicles(map);  // vehicles.js (F-08)
+  initIncidents(map); // incidents.js (F-09)
+  initObstacles(map); // obstacles.js (F-10)
+  updateObstacleSummary();
 });
 
 // ---- スタイル切り替え ----
@@ -69,6 +73,20 @@ document.querySelectorAll('.city-btn').forEach((btn) => {
   });
 });
 
+// ---- 水利障害サマリを右パネルに表示 ----
+function updateObstacleSummary() {
+  const el = document.getElementById('obstacle-summary');
+  if (!el) return;
+  const active = typeof getActiveObstacles === 'function' ? getActiveObstacles() : [];
+  if (active.length === 0) {
+    el.textContent = '現在の障害水利: なし';
+  } else {
+    el.innerHTML = active.map((o) =>
+      `<div>${o.hydrantId}: ${o.reason}<br><small>${o.endDate} まで</small></div>`
+    ).join('');
+  }
+}
+
 // ---- 背景クリックでポップアップ（フィーチャーをクリックしていない場合のみ）----
 map.on('click', (e) => {
   // フィーチャークリックは layers.js 側で preventDefault() しているが、
@@ -79,6 +97,7 @@ map.on('click', (e) => {
   const interactiveLayers = [
     'hydrants-public', 'hydrants-private', 'water-tanks',
     'districts-fill', 'hazard-zones-fill',
+    'vehicles-symbol', 'incidents-symbol', 'obstacles-symbol',
   ];
   const hitFeature = features.find((f) => interactiveLayers.includes(f.layer.id));
   if (hitFeature) return; // フィーチャー上はスキップ

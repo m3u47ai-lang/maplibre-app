@@ -324,3 +324,275 @@ button:disabled {
   color: #e07020;
   font-weight: 600;
 }
+
+/* ---- Phase 2: 車両動態バー（上部左）---- */
+
+#vehicle-bar {
+  position: absolute;
+  top: 16px;
+  left: 216px; /* レイヤパネル右端より少し右 */
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(26, 26, 46, 0.88);
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+#vehicle-updated {
+  font-family: monospace;
+  opacity: 0.9;
+}
+
+#vehicle-polling-btn {
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  background: #4361ee;
+}
+
+#vehicle-polling-btn:hover {
+  background: #3451d1;
+}
+
+/* ---- Phase 2: 災害受信票モーダル ---- */
+
+#incident-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#incident-modal-inner {
+  background: #fff;
+  border-radius: 12px;
+  width: 480px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+#incident-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: #1a1a2e;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+#incident-modal-close {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+#incident-modal-close:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+#incident-modal-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #555;
+}
+
+.modal-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.modal-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.82rem;
+  color: #555;
+}
+
+.incident-id {
+  font-size: 0.72rem;
+  color: #999;
+  font-family: monospace;
+  margin-left: auto;
+}
+
+.incident-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.incident-badge.incident-火災   { background: #c1121f; }
+.incident-badge.incident-救急   { background: #e07020; }
+.incident-badge.incident-風水害 { background: #0077cc; }
+
+.modal-select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  background: #fff;
+}
+
+/* 活動記録リスト */
+.records-list {
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  max-height: 160px;
+  overflow-y: auto;
+  font-size: 0.82rem;
+}
+
+.record-row {
+  display: grid;
+  grid-template-columns: 48px 72px 1fr;
+  gap: 6px;
+  padding: 6px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  line-height: 1.4;
+}
+
+.record-row:last-child {
+  border-bottom: none;
+}
+
+.record-time {
+  font-family: monospace;
+  color: #888;
+  font-size: 0.78rem;
+}
+
+.record-author {
+  color: #4361ee;
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+
+.record-content {
+  color: #333;
+}
+
+.record-empty {
+  padding: 10px;
+  color: #bbb;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+/* 活動記録フォーム */
+.record-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.record-form-row {
+  display: flex;
+  gap: 6px;
+}
+
+.modal-input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  flex: 1;
+}
+
+.modal-textarea {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.modal-btn-primary {
+  padding: 8px 16px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.modal-btn-primary:hover {
+  background: #3451d1;
+}
+
+/* ---- Phase 2: 障害サマリ（右パネル内）---- */
+
+.badge {
+  display: inline-block;
+  background: #c1121f;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  padding: 1px 6px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.obstacle-info {
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.obstacle-info div {
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.obstacle-info div:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.obstacle-info small {
+  color: #e07020;
+}
