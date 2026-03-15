@@ -1,0 +1,101 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6380, 35.4437] },
+      "properties": {
+        "type": "公設消火栓", "id": "H-001", "address": "横浜市中区山下町1",
+        "diameter": 100, "year": 2012, "inspection": "正常", "note": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6402, 35.4451] },
+      "properties": {
+        "type": "公設消火栓", "id": "H-002", "address": "横浜市中区山下町15",
+        "diameter": 75, "year": 2008, "inspection": "正常", "note": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6358, 35.4422] },
+      "properties": {
+        "type": "公設消火栓", "id": "H-003", "address": "横浜市中区日本大通1",
+        "diameter": 100, "year": 2015, "inspection": "正常", "note": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6421, 35.4412] },
+      "properties": {
+        "type": "公設消火栓", "id": "H-004", "address": "横浜市中区海岸通3",
+        "diameter": 75, "year": 2010, "inspection": "要注意", "note": "次回点検時に弁交換予定"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6340, 35.4465] },
+      "properties": {
+        "type": "公設消火栓", "id": "H-005", "address": "横浜市中区本町4",
+        "diameter": 150, "year": 2018, "inspection": "正常", "note": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6445, 35.4438] },
+      "properties": {
+        "type": "公設消火栓", "id": "H-006", "address": "横浜市中区新港1",
+        "diameter": 75, "year": 2005, "inspection": "正常", "note": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6395, 35.4480] },
+      "properties": {
+        "type": "公設消火栓", "id": "H-007", "address": "横浜市中区北仲通3",
+        "diameter": 100, "year": 2020, "inspection": "正常", "note": "新設"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6320, 35.4455] },
+      "properties": {
+        "type": "私設消火栓", "id": "P-001", "address": "横浜市中区本町3（ランドマーク前）",
+        "diameter": 65, "year": 2003, "inspection": "正常", "note": "施設管理者連絡先：045-xxx-xxxx"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6462, 35.4425] },
+      "properties": {
+        "type": "私設消火栓", "id": "P-002", "address": "横浜市中区新港2（倉庫群内）",
+        "diameter": 65, "year": 2007, "inspection": "要注意", "note": "施設管理者確認要"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6375, 35.4500] },
+      "properties": {
+        "type": "私設消火栓", "id": "P-003", "address": "横浜市中区北仲通5（マンション敷地内）",
+        "diameter": 65, "year": 2014, "inspection": "正常", "note": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6430, 35.4395] },
+      "properties": {
+        "type": "公設消火栓", "id": "H-008", "address": "横浜市中区海岸通5",
+        "diameter": 75, "year": 2016, "inspection": "正常", "note": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6305, 35.4440] },
+      "properties": {
+        "type": "公設消火栓", "id": "H-009", "address": "横浜市西区みなとみらい4",
+        "diameter": 100, "year": 2011, "inspection": "正常", "note": ""
+      }
+    }
+  ]
+}
