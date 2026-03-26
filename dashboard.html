@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理職ダッシュボード — 横浜市消防局</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      background: #f0f2f8;
+    }
+
+    #dashboard-header {
+      margin-top: 40px;
+      height: 48px;
+      background: #1a1a2e;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    #dashboard-header h1 {
+      font-size: 1rem;
+      color: #c0d0ff;
+      font-weight: 700;
+    }
+
+    #dashboard-header .dash-date {
+      font-size: 0.8rem;
+      color: #6070a0;
+      margin-left: 8px;
+    }
+
+    #dashboard-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 12px;
+      gap: 12px;
+    }
+
+    /* 上段：KPI + 棒グラフ */
+    #top-row {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+      height: 160px;
+    }
+
+    .kpi-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 150px;
+    }
+
+    .kpi-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .kpi-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      font-family: 'Courier New', monospace;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .kpi-sub {
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .kpi-sub.up   { color: #e63946; }
+    .kpi-sub.down { color: #2a9d8f; }
+    .kpi-sub.flat { color: #888; }
+
+    .kpi-icon {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    .chart-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .card-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      flex-shrink: 0;
+    }
+
+    .chart-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 中段：ヒートマップ + 折れ線グラフ */
+    #mid-row {
+      flex: 1;
+      display: flex;
+      gap: 12px;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    #map-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #map-card-header {
+      padding: 10px 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #eaecf4;
+      background: #f8f9fd;
+      border-radius: 10px 10px 0 0;
+      flex-shrink: 0;
+    }
+
+    #heatmap-div {
+      flex: 1;
+      border-radius: 0 0 10px 10px;
+    }
+
+    #trend-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      width: 380px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 共通ナビゲーション -->
+  <nav id="global-nav">
+    <span class="nav-brand">横浜市消防局 GIS</span>
+    <a href="index.html" class="nav-link">既存マップ</a>
+    <a href="dispatch.html" class="nav-link">指令管制</a>
+    <a href="prevention.html" class="nav-link">予防管理</a>
+    <a href="dashboard.html" class="nav-link active">ダッシュボード</a>
+  </nav>
+
+  <!-- ダッシュボードヘッダー -->
+  <div id="dashboard-header">
+    <h1>横浜市消防局 — 統計ダッシュボード</h1>
+    <span class="dash-date">2026-03-26 現在</span>
+  </div>
+
+  <div id="dashboard-body">
+    <!-- 上段 -->
+    <div id="top-row">
+      <div class="kpi-card">
+        <div class="kpi-icon">🚒</div>
+        <div class="kpi-label">今月出動件数</div>
+        <div class="kpi-value">1,234</div>
+        <div class="kpi-sub up">前月比 +3.2%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">🚑</div>
+        <div class="kpi-label">救急搬送件数</div>
+        <div class="kpi-value">987</div>
+        <div class="kpi-sub down">前月比 −1.4%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">🔥</div>
+        <div class="kpi-label">火災件数</div>
+        <div class="kpi-value">42</div>
+        <div class="kpi-sub up">前月比 +8.7%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">⏱</div>
+        <div class="kpi-label">平均応答時間</div>
+        <div class="kpi-value">6.2<span style="font-size:1rem">分</span></div>
+        <div class="kpi-sub down">前月比 −0.3分</div>
+      </div>
+      <div class="chart-card">
+        <div class="card-title">署別月間出動件数</div>
+        <div class="chart-container">
+          <canvas id="station-bar-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- 中段 -->
+    <div id="mid-row">
+      <div id="map-card">
+        <div id="map-card-header">出動ヒートマップ（過去30日）</div>
+        <div id="heatmap-div"></div>
+      </div>
+      <div id="trend-card">
+        <div class="card-title">月別出動件数推移（12ヶ月）</div>
+        <div class="chart-container">
+          <canvas id="trend-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---- ダミーデータ ----
+    const STATIONS = ['中署','西署','南署','港南署','保土ケ谷署','旭署','磯子署','金沢署','港北署','緑署'];
+    const STATION_COUNTS = [312, 198, 156, 134, 178, 143, 121, 98, 187, 165];
+
+    const MONTHS_12 = ['4月','5月','6月','7月','8月','9月','10月','11月','12月','1月','2月','3月'];
+    const MONTHLY_DISPATCH = [1120, 1080, 1050, 1180, 1240, 1090, 1150, 1200, 1320, 1280, 1190, 1234];
+    const MONTHLY_EMS      = [890,  860,  820,  940,  980,  870,  920,  960,  1050, 1020, 1000, 987];
+
+    // ---- ヒートマップ用ポイント（横浜市内のダミー出動地点） ----
+    const HEAT_POINTS = (() => {
+      const center = [139.6380, 35.4437];
+      // 密集クラスタ（よく出動するエリア）
+      const clusters = [
+        { lng:139.6380, lat:35.4437, weight:1.0, count:40 },
+        { lng:139.6450, lat:35.4490, weight:0.8, count:30 },
+        { lng:139.6220, lat:35.4560, weight:0.7, count:25 },
+        { lng:139.6210, lat:35.4250, weight:0.6, count:20 },
+        { lng:139.6070, lat:35.3940, weight:0.5, count:18 },
+        { lng:139.5940, lat:35.4620, weight:0.4, count:15 },
+        { lng:139.6370, lat:35.4030, weight:0.5, count:16 },
+        { lng:139.6440, lat:35.5330, weight:0.4, count:14 },
+      ];
+
+      const features = [];
+      clusters.forEach(c => {
+        for (let i = 0; i < c.count; i++) {
+          features.push({
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [
+                c.lng + (Math.random()-0.5)*0.02,
+                c.lat + (Math.random()-0.5)*0.015,
+              ],
+            },
+            properties: { weight: c.weight * (0.5 + Math.random()*0.5) },
+          });
+        }
+      });
+      // ランダム散布
+      for (let i = 0; i < 150; i++) {
+        features.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [
+              139.6380 + (Math.random()-0.5)*0.12,
+              35.4437 + (Math.random()-0.5)*0.10,
+            ],
+          },
+          properties: { weight: Math.random()*0.4 },
+        });
+      }
+      return { type: 'FeatureCollection', features };
+    })();
+
+    // ---- Chart.js: 署別棒グラフ ----
+    const barCtx = document.getElementById('station-bar-chart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: STATIONS,
+        datasets: [{
+          label: '出動件数',
+          data: STATION_COUNTS,
+          backgroundColor: STATION_COUNTS.map(v => v >= 200 ? '#e63946cc' : '#4361eecc'),
+          borderColor: STATION_COUNTS.map(v => v >= 200 ? '#c1121f' : '#3451d1'),
+          borderWidth: 1,
+          borderRadius: 4,
+        }],
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+        },
+        scales: {
+          x: {
+            grid: { color: '#f0f0f8' },
+            ticks: { font: { size: 10 }, color: '#888' },
+          },
+          y: {
+            grid: { display: false },
+            ticks: { font: { size: 10 }, color: '#444' },
+          },
+        },
+      },
+    });
+
+    // ---- Chart.js: 月別推移折れ線グラフ ----
+    const trendCtx = document.getElementById('trend-chart').getContext('2d');
+    new Chart(trendCtx, {
+      type: 'line',
+      data: {
+        labels: MONTHS_12,
+        datasets: [
+          {
+            label: '出動件数',
+            data: MONTHLY_DISPATCH,
+            borderColor: '#4361ee',
+            backgroundColor: 'rgba(67,97,238,0.1)',
+            tension: 0.35,
+            fill: true,
+            pointRadius: 4,
+            pointBackgroundColor: '#4361ee',
+          },
+          {
+            label: '救急搬送',
+            data: MONTHLY_EMS,
+            borderColor: '#e07020',
+            backgroundColor: 'rgba(224,112,32,0.07)',
+            tension: 0.35,
+            fill: true,
+            pointRadius: 4,
+            pointBackgroundColor: '#e07020',
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { font: { size: 10 }, boxWidth: 12, padding: 8 },
+          },
+        },
+        scales: {
+          x: {
+            grid: { color: '#f0f0f8' },
+            ticks: { font: { size: 10 }, color: '#888' },
+          },
+          y: {
+            grid: { color: '#f0f0f8' },
+            ticks: { font: { size: 10 }, color: '#888' },
+            min: 800,
+          },
+        },
+      },
+    });
+
+    // ---- MapLibre ヒートマップ ----
+    const heatmap = new maplibregl.Map({
+      container: 'heatmap-div',
+      style: 'https://tile.openstreetmap.jp/styles/osm-bright/style.json',
+      center: [139.6380, 35.4437],
+      zoom: 11,
+    });
+
+    heatmap.addControl(new maplibregl.NavigationControl(), 'top-left');
+
+    heatmap.on('load', () => {
+      heatmap.addSource('heatmap-data', {
+        type: 'geojson',
+        data: HEAT_POINTS,
+      });
+
+      heatmap.addLayer({
+        id: 'heatmap-layer',
+        type: 'heatmap',
+        source: 'heatmap-data',
+        maxzoom: 16,
+        paint: {
+          'heatmap-weight': ['interpolate',['linear'],['get','weight'],0,0,1,1],
+          'heatmap-intensity': ['interpolate',['linear'],['zoom'],8,1,14,3],
+          'heatmap-color': [
+            'interpolate', ['linear'], ['heatmap-density'],
+            0, 'rgba(33,102,172,0)',
+            0.2, 'rgba(103,169,207,0.6)',
+            0.4, 'rgba(253,219,99,0.75)',
+            0.6, 'rgba(239,138,98,0.85)',
+            0.8, 'rgba(215,48,31,0.9)',
+            1, 'rgb(178,24,43)',
+          ],
+          'heatmap-radius': ['interpolate',['linear'],['zoom'],10,18,14,35],
+          'heatmap-opacity': 0.85,
+        },
+      });
+
+      // ポイントレイヤ（高ズーム時）
+      heatmap.addLayer({
+        id: 'heat-points',
+        type: 'circle',
+        source: 'heatmap-data',
+        minzoom: 13,
+        paint: {
+          'circle-radius': 5,
+          'circle-color': '#e63946',
+          'circle-stroke-width': 1,
+          'circle-stroke-color': '#fff',
+          'circle-opacity': 0.8,
+        },
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,2205 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6382,
+          35.448
+        ]
+      },
+      "properties": {
+        "id": "FP-001",
+        "name": "横浜グランドホテル",
+        "address": "横浜市中区山下町1-1",
+        "type": "ホテル・旅館",
+        "last_inspection": "2025-04-10",
+        "next_inspection": "2026-04-10",
+        "inspection_status": "正常",
+        "floors": 3,
+        "capacity": 150,
+        "inspector": "田中 守"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.622,
+          35.456
+        ]
+      },
+      "properties": {
+        "id": "FP-002",
+        "name": "みなとみらいホテル",
+        "address": "横浜市中区本牧町2-2",
+        "type": "ホテル・旅館",
+        "last_inspection": "2025-06-15",
+        "next_inspection": "2026-06-15",
+        "inspection_status": "正常",
+        "floors": 6,
+        "capacity": 197,
+        "inspector": "鈴木 孝男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.621,
+          35.425
+        ]
+      },
+      "properties": {
+        "id": "FP-003",
+        "name": "横浜ベイサイドイン",
+        "address": "横浜市西区岡野3-3-3",
+        "type": "ホテル・旅館",
+        "last_inspection": "2025-08-20",
+        "next_inspection": "2026-08-20",
+        "inspection_status": "正常",
+        "floors": 9,
+        "capacity": 244,
+        "inspector": "佐藤 敏雄"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.607,
+          35.394
+        ]
+      },
+      "properties": {
+        "id": "FP-004",
+        "name": "ホテルニューグランド",
+        "address": "横浜市南区南太田4-4-4",
+        "type": "ホテル・旅館",
+        "last_inspection": "2025-10-05",
+        "next_inspection": "2026-10-05",
+        "inspection_status": "正常",
+        "floors": 12,
+        "capacity": 291,
+        "inspector": "高橋 理恵"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.594,
+          35.462
+        ]
+      },
+      "properties": {
+        "id": "FP-005",
+        "name": "港南旅館",
+        "address": "横浜市港南区上大岡東5-5-5",
+        "type": "ホテル・旅館",
+        "last_inspection": "2025-12-01",
+        "next_inspection": "2026-12-01",
+        "inspection_status": "正常",
+        "floors": 15,
+        "capacity": 338,
+        "inspector": "渡辺 博之"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6080,
+          35.4730
+        ]
+      },
+      "properties": {
+        "id": "FP-006",
+        "name": "保土ケ谷ビジネスホテル",
+        "address": "横浜市保土ケ谷区川辺町1-6",
+        "type": "ホテル・旅館",
+        "last_inspection": "2025-02-28",
+        "next_inspection": "2026-02-28",
+        "inspection_status": "正常",
+        "floors": 18,
+        "capacity": 385,
+        "inspector": "伊藤 勝利"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.637,
+          35.403
+        ]
+      },
+      "properties": {
+        "id": "FP-007",
+        "name": "旭区温泉旅館",
+        "address": "横浜市旭区鶴ケ峰2-7-7",
+        "type": "ホテル・旅館",
+        "last_inspection": "2025-07-14",
+        "next_inspection": "2026-07-14",
+        "inspection_status": "正常",
+        "floors": 21,
+        "capacity": 432,
+        "inspector": "山本 光代"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.631,
+          35.412
+        ]
+      },
+      "properties": {
+        "id": "FP-008",
+        "name": "磯子シーサイドホテル",
+        "address": "横浜市磯子区磯子3-8-8",
+        "type": "ホテル・旅館",
+        "last_inspection": "2025-09-30",
+        "next_inspection": "2026-09-30",
+        "inspection_status": "正常",
+        "floors": 24,
+        "capacity": 479,
+        "inspector": "中村 三郎"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.644,
+          35.483
+        ]
+      },
+      "properties": {
+        "id": "FP-009",
+        "name": "金沢ホテル&スパ",
+        "address": "横浜市金沢区泥亀4-1-9",
+        "type": "ホテル・旅館",
+        "last_inspection": "2025-11-22",
+        "next_inspection": "2026-11-22",
+        "inspection_status": "正常",
+        "floors": 27,
+        "capacity": 526,
+        "inspector": "小林 和夫"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.613,
+          35.476
+        ]
+      },
+      "properties": {
+        "id": "FP-010",
+        "name": "港北ビジネスホテル",
+        "address": "横浜市港北区大豆戸町52",
+        "type": "ホテル・旅館",
+        "last_inspection": "2025-03-18",
+        "next_inspection": "2026-03-18",
+        "inspection_status": "正常",
+        "floors": 30,
+        "capacity": 573,
+        "inspector": "加藤 洋子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.645,
+          35.45
+        ]
+      },
+      "properties": {
+        "id": "FP-011",
+        "name": "横浜中央病院",
+        "address": "横浜市緑区寺山町13",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-05-08",
+        "next_inspection": "2026-05-08",
+        "inspection_status": "正常",
+        "floors": 3,
+        "capacity": 620,
+        "inspector": "松本 義行"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.63,
+          35.455
+        ]
+      },
+      "properties": {
+        "id": "FP-012",
+        "name": "横浜みなと病院",
+        "address": "横浜市中区関内2-4-2",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-01-25",
+        "next_inspection": "2026-01-25",
+        "inspection_status": "正常",
+        "floors": 6,
+        "capacity": 667,
+        "inspector": "井上 文男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.615,
+          35.44
+        ]
+      },
+      "properties": {
+        "id": "FP-013",
+        "name": "南区総合病院",
+        "address": "横浜市中区山下町3-5",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-04-10",
+        "next_inspection": "2026-04-10",
+        "inspection_status": "正常",
+        "floors": 9,
+        "capacity": 714,
+        "inspector": "木村 節子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.61,
+          35.435
+        ]
+      },
+      "properties": {
+        "id": "FP-014",
+        "name": "港南医療センター",
+        "address": "横浜市中区本牧町4-6",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-06-15",
+        "next_inspection": "2026-06-15",
+        "inspection_status": "正常",
+        "floors": 12,
+        "capacity": 761,
+        "inspector": "林 哲哉"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.595,
+          35.47
+        ]
+      },
+      "properties": {
+        "id": "FP-015",
+        "name": "保土ケ谷リハビリ病院",
+        "address": "横浜市西区岡野5-7-5",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-08-20",
+        "next_inspection": "2026-08-20",
+        "inspection_status": "正常",
+        "floors": 15,
+        "capacity": 808,
+        "inspector": "清水 啓介"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.595,
+          35.465
+        ]
+      },
+      "properties": {
+        "id": "FP-016",
+        "name": "旭区老人ホーム",
+        "address": "横浜市南区南太田1-8-6",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-10-05",
+        "next_inspection": "2026-10-05",
+        "inspection_status": "正常",
+        "floors": 18,
+        "capacity": 855,
+        "inspector": "田中 守"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.598,
+          35.48
+        ]
+      },
+      "properties": {
+        "id": "FP-017",
+        "name": "磯子総合病院",
+        "address": "横浜市港南区上大岡東2-1-7",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-12-01",
+        "next_inspection": "2026-12-01",
+        "inspection_status": "正常",
+        "floors": 21,
+        "capacity": 902,
+        "inspector": "鈴木 孝男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.65,
+          35.41
+        ]
+      },
+      "properties": {
+        "id": "FP-018",
+        "name": "金沢クリニック",
+        "address": "横浜市保土ケ谷区川辺町3-2",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-02-28",
+        "next_inspection": "2026-02-28",
+        "inspection_status": "正常",
+        "floors": 24,
+        "capacity": 949,
+        "inspector": "佐藤 敏雄"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.635,
+          35.395
+        ]
+      },
+      "properties": {
+        "id": "FP-019",
+        "name": "港北病院",
+        "address": "横浜市旭区鶴ケ峰4-3-9",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-07-14",
+        "next_inspection": "2026-07-14",
+        "inspection_status": "正常",
+        "floors": 27,
+        "capacity": 996,
+        "inspector": "高橋 理恵"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.628,
+          35.402
+        ]
+      },
+      "properties": {
+        "id": "FP-020",
+        "name": "緑区介護施設",
+        "address": "横浜市磯子区磯子5-4-10",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-09-30",
+        "next_inspection": "2026-09-30",
+        "inspection_status": "正常",
+        "floors": 30,
+        "capacity": 1043,
+        "inspector": "渡辺 博之"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.638,
+          35.484
+        ]
+      },
+      "properties": {
+        "id": "FP-021",
+        "name": "横浜南福祉センター",
+        "address": "横浜市金沢区泥亀1-5-1",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-11-22",
+        "next_inspection": "2026-11-22",
+        "inspection_status": "正常",
+        "floors": 3,
+        "capacity": 1090,
+        "inspector": "伊藤 勝利"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.618,
+          35.478
+        ]
+      },
+      "properties": {
+        "id": "FP-022",
+        "name": "山下町デイサービス",
+        "address": "横浜市港北区大豆戸町26",
+        "type": "病院・福祉施設",
+        "last_inspection": "2025-03-18",
+        "next_inspection": "2026-03-18",
+        "inspection_status": "正常",
+        "floors": 6,
+        "capacity": 1137,
+        "inspector": "山本 光代"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.632,
+          35.445
+        ]
+      },
+      "properties": {
+        "id": "FP-023",
+        "name": "横浜市立中央小学校",
+        "address": "横浜市緑区寺山町37",
+        "type": "学校",
+        "last_inspection": "2025-05-08",
+        "next_inspection": "2026-05-08",
+        "inspection_status": "正常",
+        "floors": 9,
+        "capacity": 1184,
+        "inspector": "中村 三郎"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.617,
+          35.448
+        ]
+      },
+      "properties": {
+        "id": "FP-024",
+        "name": "横浜市立西小学校",
+        "address": "横浜市中区関内4-8-4",
+        "type": "学校",
+        "last_inspection": "2025-01-25",
+        "next_inspection": "2026-01-25",
+        "inspection_status": "正常",
+        "floors": 12,
+        "capacity": 1231,
+        "inspector": "小林 和夫"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.606,
+          35.423
+        ]
+      },
+      "properties": {
+        "id": "FP-025",
+        "name": "横浜市立南小学校",
+        "address": "横浜市中区山下町5-1",
+        "type": "学校",
+        "last_inspection": "2025-04-10",
+        "next_inspection": "2026-04-10",
+        "inspection_status": "正常",
+        "floors": 15,
+        "capacity": 1278,
+        "inspector": "加藤 洋子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.599,
+          35.452
+        ]
+      },
+      "properties": {
+        "id": "FP-026",
+        "name": "横浜市立港南中学校",
+        "address": "横浜市中区本牧町1-2",
+        "type": "学校",
+        "last_inspection": "2025-06-15",
+        "next_inspection": "2026-06-15",
+        "inspection_status": "正常",
+        "floors": 18,
+        "capacity": 1325,
+        "inspector": "松本 義行"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.607,
+          35.475
+        ]
+      },
+      "properties": {
+        "id": "FP-027",
+        "name": "横浜市立保土ケ谷高校",
+        "address": "横浜市西区岡野2-3-7",
+        "type": "学校",
+        "last_inspection": "2025-08-20",
+        "next_inspection": "2026-08-20",
+        "inspection_status": "正常",
+        "floors": 21,
+        "capacity": 1372,
+        "inspector": "井上 文男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.648,
+          35.402
+        ]
+      },
+      "properties": {
+        "id": "FP-028",
+        "name": "旭区立元町小学校",
+        "address": "横浜市南区南太田3-4-8",
+        "type": "学校",
+        "last_inspection": "2025-10-05",
+        "next_inspection": "2026-10-05",
+        "inspection_status": "正常",
+        "floors": 24,
+        "capacity": 1419,
+        "inspector": "木村 節子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.629,
+          35.395
+        ]
+      },
+      "properties": {
+        "id": "FP-029",
+        "name": "横浜市立磯子中学校",
+        "address": "横浜市港南区上大岡東4-5-9",
+        "type": "学校",
+        "last_inspection": "2025-12-01",
+        "next_inspection": "2026-12-01",
+        "inspection_status": "正常",
+        "floors": 27,
+        "capacity": 1466,
+        "inspector": "林 哲哉"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.618,
+          35.416
+        ]
+      },
+      "properties": {
+        "id": "FP-030",
+        "name": "金沢高等学校",
+        "address": "横浜市保土ケ谷区川辺町5-6",
+        "type": "学校",
+        "last_inspection": "2025-02-28",
+        "next_inspection": "2026-02-28",
+        "inspection_status": "正常",
+        "floors": 30,
+        "capacity": 1513,
+        "inspector": "清水 啓介"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.635,
+          35.485
+        ]
+      },
+      "properties": {
+        "id": "FP-031",
+        "name": "港北小学校",
+        "address": "横浜市旭区鶴ケ峰1-7-1",
+        "type": "学校",
+        "last_inspection": "2025-07-14",
+        "next_inspection": "2026-07-14",
+        "inspection_status": "正常",
+        "floors": 3,
+        "capacity": 1560,
+        "inspector": "田中 守"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.608,
+          35.478
+        ]
+      },
+      "properties": {
+        "id": "FP-032",
+        "name": "緑区立中山中学校",
+        "address": "横浜市磯子区磯子2-8-2",
+        "type": "学校",
+        "last_inspection": "2025-09-30",
+        "next_inspection": "2026-09-30",
+        "inspection_status": "正常",
+        "floors": 6,
+        "capacity": 1607,
+        "inspector": "鈴木 孝男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.641,
+          35.441
+        ]
+      },
+      "properties": {
+        "id": "FP-033",
+        "name": "横浜国立大学付属小学校",
+        "address": "横浜市金沢区泥亀3-1-3",
+        "type": "学校",
+        "last_inspection": "2025-11-22",
+        "next_inspection": "2026-11-22",
+        "inspection_status": "正常",
+        "floors": 9,
+        "capacity": 1654,
+        "inspector": "佐藤 敏雄"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.613,
+          35.451
+        ]
+      },
+      "properties": {
+        "id": "FP-034",
+        "name": "横浜市立根岸小学校",
+        "address": "横浜市港北区大豆戸町42",
+        "type": "学校",
+        "last_inspection": "2025-03-18",
+        "next_inspection": "2026-03-18",
+        "inspection_status": "正常",
+        "floors": 12,
+        "capacity": 1701,
+        "inspector": "高橋 理恵"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.602,
+          35.419
+        ]
+      },
+      "properties": {
+        "id": "FP-035",
+        "name": "横浜市立本牧中学校",
+        "address": "横浜市緑区寺山町53",
+        "type": "学校",
+        "last_inspection": "2025-05-08",
+        "next_inspection": "2026-05-08",
+        "inspection_status": "正常",
+        "floors": 15,
+        "capacity": 1748,
+        "inspector": "渡辺 博之"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.592,
+          35.459
+        ]
+      },
+      "properties": {
+        "id": "FP-036",
+        "name": "横浜市立上大岡小学校",
+        "address": "横浜市中区関内1-4-6",
+        "type": "学校",
+        "last_inspection": "2025-01-25",
+        "next_inspection": "2026-01-25",
+        "inspection_status": "正常",
+        "floors": 18,
+        "capacity": 1795,
+        "inspector": "伊藤 勝利"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.602,
+          35.487
+        ]
+      },
+      "properties": {
+        "id": "FP-037",
+        "name": "保土ケ谷区立岩崎小学校",
+        "address": "横浜市中区山下町2-5",
+        "type": "学校",
+        "last_inspection": "2025-04-10",
+        "next_inspection": "2026-04-10",
+        "inspection_status": "正常",
+        "floors": 21,
+        "capacity": 1842,
+        "inspector": "山本 光代"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.643,
+          35.407
+        ]
+      },
+      "properties": {
+        "id": "FP-038",
+        "name": "横浜タカシマヤ",
+        "address": "横浜市中区本牧町3-6",
+        "type": "百貨店・商業施設",
+        "last_inspection": "2025-06-15",
+        "next_inspection": "2026-06-15",
+        "inspection_status": "正常",
+        "floors": 24,
+        "capacity": 1889,
+        "inspector": "中村 三郎"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.625,
+          35.398
+        ]
+      },
+      "properties": {
+        "id": "FP-039",
+        "name": "そごう横浜店",
+        "address": "横浜市西区岡野4-7-9",
+        "type": "百貨店・商業施設",
+        "last_inspection": "2025-08-20",
+        "next_inspection": "2026-08-20",
+        "inspection_status": "正常",
+        "floors": 27,
+        "capacity": 1936,
+        "inspector": "小林 和夫"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.612,
+          35.413
+        ]
+      },
+      "properties": {
+        "id": "FP-040",
+        "name": "横浜マルイ",
+        "address": "横浜市南区南太田5-8-10",
+        "type": "百貨店・商業施設",
+        "last_inspection": "2025-10-05",
+        "next_inspection": "2026-10-05",
+        "inspection_status": "正常",
+        "floors": 30,
+        "capacity": 1983,
+        "inspector": "加藤 洋子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.639,
+          35.488
+        ]
+      },
+      "properties": {
+        "id": "FP-041",
+        "name": "上大岡ショッピングモール",
+        "address": "横浜市港南区上大岡東1-1-1",
+        "type": "百貨店・商業施設",
+        "last_inspection": "2025-12-01",
+        "next_inspection": "2026-12-01",
+        "inspection_status": "正常",
+        "floors": 3,
+        "capacity": 2030,
+        "inspector": "松本 義行"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.59,
+          35.468
+        ]
+      },
+      "properties": {
+        "id": "FP-042",
+        "name": "港北ニュータウンモール",
+        "address": "横浜市保土ケ谷区川辺町2-2",
+        "type": "百貨店・商業施設",
+        "last_inspection": "2025-02-28",
+        "next_inspection": "2026-02-28",
+        "inspection_status": "正常",
+        "floors": 6,
+        "capacity": 77,
+        "inspector": "井上 文男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.627,
+          35.446
+        ]
+      },
+      "properties": {
+        "id": "FP-043",
+        "name": "金沢シッピングセンター",
+        "address": "横浜市旭区鶴ケ峰3-3-3",
+        "type": "百貨店・商業施設",
+        "last_inspection": "2025-07-14",
+        "next_inspection": "2026-07-14",
+        "inspection_status": "正常",
+        "floors": 9,
+        "capacity": 124,
+        "inspector": "木村 節子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.625,
+          35.439
+        ]
+      },
+      "properties": {
+        "id": "FP-044",
+        "name": "保土ケ谷プラザ",
+        "address": "横浜市磯子区磯子4-4-4",
+        "type": "百貨店・商業施設",
+        "last_inspection": "2025-09-30",
+        "next_inspection": "2026-09-30",
+        "inspection_status": "正常",
+        "floors": 12,
+        "capacity": 171,
+        "inspector": "林 哲哉"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.611,
+          35.426
+        ]
+      },
+      "properties": {
+        "id": "FP-045",
+        "name": "横浜ルミネ",
+        "address": "横浜市金沢区泥亀5-5-5",
+        "type": "百貨店・商業施設",
+        "last_inspection": "2025-11-22",
+        "next_inspection": "2026-11-22",
+        "inspection_status": "正常",
+        "floors": 15,
+        "capacity": 218,
+        "inspector": "清水 啓介"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.599,
+          35.466
+        ]
+      },
+      "properties": {
+        "id": "FP-046",
+        "name": "横浜中央食品工場",
+        "address": "横浜市港北区大豆戸町16",
+        "type": "工場・倉庫",
+        "last_inspection": "2025-03-18",
+        "next_inspection": "2026-03-18",
+        "inspection_status": "正常",
+        "floors": 18,
+        "capacity": 265,
+        "inspector": "田中 守"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.589,
+          35.48
+        ]
+      },
+      "properties": {
+        "id": "FP-047",
+        "name": "本牧埠頭倉庫",
+        "address": "横浜市緑区寺山町27",
+        "type": "工場・倉庫",
+        "last_inspection": "2025-05-08",
+        "next_inspection": "2026-05-08",
+        "inspection_status": "正常",
+        "floors": 21,
+        "capacity": 312,
+        "inspector": "鈴木 孝男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.643,
+          35.398
+        ]
+      },
+      "properties": {
+        "id": "FP-048",
+        "name": "港南物流センター",
+        "address": "横浜市中区関内3-8-8",
+        "type": "工場・倉庫",
+        "last_inspection": "2025-01-25",
+        "next_inspection": "2026-01-25",
+        "inspection_status": "正常",
+        "floors": 24,
+        "capacity": 359,
+        "inspector": "佐藤 敏雄"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6330,
+          35.4020
+        ]
+      },
+      "properties": {
+        "id": "FP-049",
+        "name": "保土ケ谷印刷工場",
+        "address": "横浜市中区山下町4-1",
+        "type": "工場・倉庫",
+        "last_inspection": "2025-04-10",
+        "next_inspection": "2026-04-10",
+        "inspection_status": "正常",
+        "floors": 27,
+        "capacity": 406,
+        "inspector": "高橋 理恵"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.623,
+          35.476
+        ]
+      },
+      "properties": {
+        "id": "FP-050",
+        "name": "旭区精密機械工場",
+        "address": "横浜市中区本牧町5-2",
+        "type": "工場・倉庫",
+        "last_inspection": "2025-06-15",
+        "next_inspection": "2026-06-15",
+        "inspection_status": "正常",
+        "floors": 30,
+        "capacity": 453,
+        "inspector": "渡辺 博之"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.598,
+          35.483
+        ]
+      },
+      "properties": {
+        "id": "FP-051",
+        "name": "磯子製鉄工場",
+        "address": "横浜市西区岡野1-3-1",
+        "type": "工場・倉庫",
+        "last_inspection": "2025-08-20",
+        "next_inspection": "2026-08-20",
+        "inspection_status": "正常",
+        "floors": 3,
+        "capacity": 500,
+        "inspector": "伊藤 勝利"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.636,
+          35.447
+        ]
+      },
+      "properties": {
+        "id": "FP-052",
+        "name": "金沢化学工場",
+        "address": "横浜市南区南太田2-4-2",
+        "type": "工場・倉庫",
+        "last_inspection": "2025-10-05",
+        "next_inspection": "2026-10-05",
+        "inspection_status": "正常",
+        "floors": 6,
+        "capacity": 547,
+        "inspector": "山本 光代"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.614,
+          35.444
+        ]
+      },
+      "properties": {
+        "id": "FP-053",
+        "name": "港北自動車部品工場",
+        "address": "横浜市港南区上大岡東3-5-3",
+        "type": "工場・倉庫",
+        "last_inspection": "2025-12-01",
+        "next_inspection": "2026-12-01",
+        "inspection_status": "正常",
+        "floors": 9,
+        "capacity": 594,
+        "inspector": "中村 三郎"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6,
+          35.43
+        ]
+      },
+      "properties": {
+        "id": "FP-054",
+        "name": "緑区食品加工工場",
+        "address": "横浜市保土ケ谷区川辺町4-6",
+        "type": "工場・倉庫",
+        "last_inspection": "2025-02-28",
+        "next_inspection": "2026-02-28",
+        "inspection_status": "正常",
+        "floors": 12,
+        "capacity": 641,
+        "inspector": "小林 和夫"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.593,
+          35.455
+        ]
+      },
+      "properties": {
+        "id": "FP-055",
+        "name": "横浜港湾倉庫",
+        "address": "横浜市旭区鶴ケ峰5-7-5",
+        "type": "工場・倉庫",
+        "last_inspection": "2025-07-14",
+        "next_inspection": "2026-07-14",
+        "inspection_status": "正常",
+        "floors": 15,
+        "capacity": 688,
+        "inspector": "加藤 洋子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.602,
+          35.472
+        ]
+      },
+      "properties": {
+        "id": "FP-056",
+        "name": "南区繊維工場",
+        "address": "横浜市磯子区磯子1-8-6",
+        "type": "工場・倉庫",
+        "last_inspection": "",
+        "next_inspection": "2026-06-30",
+        "inspection_status": "未実施",
+        "floors": 18,
+        "capacity": 735,
+        "inspector": "松本 義行"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.644,
+          35.413
+        ]
+      },
+      "properties": {
+        "id": "FP-057",
+        "name": "中区機械製造工場",
+        "address": "横浜市金沢区泥亀2-1-7",
+        "type": "工場・倉庫",
+        "last_inspection": "",
+        "next_inspection": "2026-08-15",
+        "inspection_status": "未実施",
+        "floors": 21,
+        "capacity": 782,
+        "inspector": "井上 文男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6270,
+          35.4020
+        ]
+      },
+      "properties": {
+        "id": "FP-058",
+        "name": "磯子電子部品工場",
+        "address": "横浜市港北区大豆戸町32",
+        "type": "工場・倉庫",
+        "last_inspection": "",
+        "next_inspection": "2027-01-01",
+        "inspection_status": "未実施",
+        "floors": 24,
+        "capacity": 829,
+        "inspector": "木村 節子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.613,
+          35.408
+        ]
+      },
+      "properties": {
+        "id": "FP-059",
+        "name": "保土ケ谷物流倉庫",
+        "address": "横浜市緑区寺山町43",
+        "type": "工場・倉庫",
+        "last_inspection": "",
+        "next_inspection": "2026-11-30",
+        "inspection_status": "未実施",
+        "floors": 27,
+        "capacity": 876,
+        "inspector": "林 哲哉"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.636,
+          35.482
+        ]
+      },
+      "properties": {
+        "id": "FP-060",
+        "name": "港南食品流通センター",
+        "address": "横浜市中区関内5-4-10",
+        "type": "工場・倉庫",
+        "last_inspection": "",
+        "next_inspection": "2026-04-01",
+        "inspection_status": "未実施",
+        "floors": 30,
+        "capacity": 923,
+        "inspector": "清水 啓介"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.611,
+          35.475
+        ]
+      },
+      "properties": {
+        "id": "FP-061",
+        "name": "みなとみらいアパート",
+        "address": "横浜市中区山下町1-5",
+        "type": "集合住宅",
+        "last_inspection": "",
+        "next_inspection": "2026-09-15",
+        "inspection_status": "未実施",
+        "floors": 3,
+        "capacity": 970,
+        "inspector": "田中 守"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.64,
+          35.443
+        ]
+      },
+      "properties": {
+        "id": "FP-062",
+        "name": "横浜中央マンション",
+        "address": "横浜市中区本牧町2-6",
+        "type": "集合住宅",
+        "last_inspection": "",
+        "next_inspection": "2026-12-31",
+        "inspection_status": "未実施",
+        "floors": 6,
+        "capacity": 1017,
+        "inspector": "鈴木 孝男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.62,
+          35.452
+        ]
+      },
+      "properties": {
+        "id": "FP-063",
+        "name": "南区アパート第1棟",
+        "address": "横浜市西区岡野3-7-3",
+        "type": "集合住宅",
+        "last_inspection": "",
+        "next_inspection": "2027-03-01",
+        "inspection_status": "未実施",
+        "floors": 9,
+        "capacity": 1064,
+        "inspector": "佐藤 敏雄"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.605,
+          35.436
+        ]
+      },
+      "properties": {
+        "id": "FP-064",
+        "name": "港南ハイツ",
+        "address": "横浜市南区南太田4-8-4",
+        "type": "集合住宅",
+        "last_inspection": "",
+        "next_inspection": "2026-07-20",
+        "inspection_status": "未実施",
+        "floors": 12,
+        "capacity": 1111,
+        "inspector": "高橋 理恵"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6080,
+          35.4480
+        ]
+      },
+      "properties": {
+        "id": "FP-065",
+        "name": "保土ケ谷団地A棟",
+        "address": "横浜市港南区上大岡東5-1-5",
+        "type": "集合住宅",
+        "last_inspection": "",
+        "next_inspection": "2026-10-10",
+        "inspection_status": "未実施",
+        "floors": 15,
+        "capacity": 1158,
+        "inspector": "渡辺 博之"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.598,
+          35.473
+        ]
+      },
+      "properties": {
+        "id": "FP-066",
+        "name": "旭区集合住宅",
+        "address": "横浜市保土ケ谷区川辺町1-2",
+        "type": "集合住宅",
+        "last_inspection": "",
+        "next_inspection": "2027-02-15",
+        "inspection_status": "未実施",
+        "floors": 18,
+        "capacity": 1205,
+        "inspector": "伊藤 勝利"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.646,
+          35.416
+        ]
+      },
+      "properties": {
+        "id": "FP-067",
+        "name": "磯子パークハウス",
+        "address": "横浜市旭区鶴ケ峰2-3-7",
+        "type": "集合住宅",
+        "last_inspection": "",
+        "next_inspection": "2026-05-25",
+        "inspection_status": "未実施",
+        "floors": 21,
+        "capacity": 1252,
+        "inspector": "山本 光代"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.631,
+          35.4
+        ]
+      },
+      "properties": {
+        "id": "FP-068",
+        "name": "金沢シーサイドマンション",
+        "address": "横浜市磯子区磯子3-4-8",
+        "type": "集合住宅",
+        "last_inspection": "",
+        "next_inspection": "2026-06-30",
+        "inspection_status": "未実施",
+        "floors": 24,
+        "capacity": 1299,
+        "inspector": "中村 三郎"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.619,
+          35.412
+        ]
+      },
+      "properties": {
+        "id": "FP-069",
+        "name": "港北レジデンス",
+        "address": "横浜市金沢区泥亀4-5-9",
+        "type": "集合住宅",
+        "last_inspection": "",
+        "next_inspection": "2026-08-15",
+        "inspection_status": "未実施",
+        "floors": 27,
+        "capacity": 1346,
+        "inspector": "小林 和夫"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.652,
+          35.436
+        ]
+      },
+      "properties": {
+        "id": "FP-070",
+        "name": "緑区住宅",
+        "address": "横浜市港北区大豆戸町56",
+        "type": "集合住宅",
+        "last_inspection": "",
+        "next_inspection": "2027-01-01",
+        "inspection_status": "未実施",
+        "floors": 30,
+        "capacity": 1393,
+        "inspector": "加藤 洋子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.61,
+          35.474
+        ]
+      },
+      "properties": {
+        "id": "FP-071",
+        "name": "横浜市民ホール",
+        "address": "横浜市緑区寺山町17",
+        "type": "劇場・映画館",
+        "last_inspection": "",
+        "next_inspection": "2026-11-30",
+        "inspection_status": "未実施",
+        "floors": 3,
+        "capacity": 1440,
+        "inspector": "松本 義行"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.634,
+          35.439
+        ]
+      },
+      "properties": {
+        "id": "FP-072",
+        "name": "横浜MM21シネマ",
+        "address": "横浜市中区関内2-8-2",
+        "type": "劇場・映画館",
+        "last_inspection": "",
+        "next_inspection": "2026-04-01",
+        "inspection_status": "未実施",
+        "floors": 6,
+        "capacity": 1487,
+        "inspector": "井上 文男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.616,
+          35.446
+        ]
+      },
+      "properties": {
+        "id": "FP-073",
+        "name": "関内ホール",
+        "address": "横浜市中区山下町3-1",
+        "type": "劇場・映画館",
+        "last_inspection": "",
+        "next_inspection": "2026-09-15",
+        "inspection_status": "未実施",
+        "floors": 9,
+        "capacity": 1534,
+        "inspector": "木村 節子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.604,
+          35.428
+        ]
+      },
+      "properties": {
+        "id": "FP-074",
+        "name": "港北シネコン",
+        "address": "横浜市中区本牧町4-2",
+        "type": "劇場・映画館",
+        "last_inspection": "",
+        "next_inspection": "2026-12-31",
+        "inspection_status": "未実施",
+        "floors": 12,
+        "capacity": 1581,
+        "inspector": "林 哲哉"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.591,
+          35.462
+        ]
+      },
+      "properties": {
+        "id": "FP-075",
+        "name": "磯子文化センター",
+        "address": "横浜市西区岡野5-3-5",
+        "type": "劇場・映画館",
+        "last_inspection": "",
+        "next_inspection": "2027-03-01",
+        "inspection_status": "未実施",
+        "floors": 15,
+        "capacity": 1628,
+        "inspector": "清水 啓介"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.598,
+          35.476
+        ]
+      },
+      "properties": {
+        "id": "FP-076",
+        "name": "横浜中華飯店",
+        "address": "横浜市南区南太田1-4-6",
+        "type": "飲食店",
+        "last_inspection": "2024-03-10",
+        "next_inspection": "2025-03-10",
+        "inspection_status": "期限超過",
+        "floors": 18,
+        "capacity": 1675,
+        "inspector": "田中 守"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.641,
+          35.404
+        ]
+      },
+      "properties": {
+        "id": "FP-077",
+        "name": "山下町レストラン",
+        "address": "横浜市港南区上大岡東2-5-7",
+        "type": "飲食店",
+        "last_inspection": "2024-01-20",
+        "next_inspection": "2025-01-20",
+        "inspection_status": "期限超過",
+        "floors": 21,
+        "capacity": 1722,
+        "inspector": "鈴木 孝男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6280,
+          35.4050
+        ]
+      },
+      "properties": {
+        "id": "FP-078",
+        "name": "横浜港カフェ",
+        "address": "横浜市保土ケ谷区川辺町3-6",
+        "type": "飲食店",
+        "last_inspection": "2023-11-05",
+        "next_inspection": "2024-11-05",
+        "inspection_status": "期限超過",
+        "floors": 24,
+        "capacity": 1769,
+        "inspector": "佐藤 敏雄"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.611,
+          35.404
+        ]
+      },
+      "properties": {
+        "id": "FP-079",
+        "name": "南区居酒屋",
+        "address": "横浜市旭区鶴ケ峰4-7-9",
+        "type": "飲食店",
+        "last_inspection": "2024-05-14",
+        "next_inspection": "2025-05-14",
+        "inspection_status": "期限超過",
+        "floors": 27,
+        "capacity": 1816,
+        "inspector": "高橋 理恵"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.637,
+          35.48
+        ]
+      },
+      "properties": {
+        "id": "FP-080",
+        "name": "保土ケ谷ラーメン店",
+        "address": "横浜市磯子区磯子5-8-10",
+        "type": "飲食店",
+        "last_inspection": "2024-07-22",
+        "next_inspection": "2025-07-22",
+        "inspection_status": "期限超過",
+        "floors": 30,
+        "capacity": 1863,
+        "inspector": "渡辺 博之"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.604,
+          35.47
+        ]
+      },
+      "properties": {
+        "id": "FP-081",
+        "name": "旭区焼肉レストラン",
+        "address": "横浜市金沢区泥亀1-1-1",
+        "type": "飲食店",
+        "last_inspection": "2023-09-18",
+        "next_inspection": "2024-09-18",
+        "inspection_status": "期限超過",
+        "floors": 3,
+        "capacity": 1910,
+        "inspector": "伊藤 勝利"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.642,
+          35.448
+        ]
+      },
+      "properties": {
+        "id": "FP-082",
+        "name": "磯子海鮮料理",
+        "address": "横浜市港北区大豆戸町22",
+        "type": "飲食店",
+        "last_inspection": "2024-02-28",
+        "next_inspection": "2025-02-28",
+        "inspection_status": "期限超過",
+        "floors": 6,
+        "capacity": 1957,
+        "inspector": "山本 光代"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.618,
+          35.439
+        ]
+      },
+      "properties": {
+        "id": "FP-083",
+        "name": "金沢ファミリーレストラン",
+        "address": "横浜市緑区寺山町33",
+        "type": "飲食店",
+        "last_inspection": "2024-08-11",
+        "next_inspection": "2025-08-11",
+        "inspection_status": "期限超過",
+        "floors": 9,
+        "capacity": 2004,
+        "inspector": "中村 三郎"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.607,
+          35.42
+        ]
+      },
+      "properties": {
+        "id": "FP-084",
+        "name": "港北ビアホール",
+        "address": "横浜市中区関内4-4-4",
+        "type": "飲食店",
+        "last_inspection": "2024-04-17",
+        "next_inspection": "2025-04-17",
+        "inspection_status": "期限超過",
+        "floors": 12,
+        "capacity": 51,
+        "inspector": "小林 和夫"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.596,
+          35.458
+        ]
+      },
+      "properties": {
+        "id": "FP-085",
+        "name": "横浜駅前カフェ",
+        "address": "横浜市中区山下町5-5",
+        "type": "飲食店",
+        "last_inspection": "2024-03-10",
+        "next_inspection": "2025-03-10",
+        "inspection_status": "期限超過",
+        "floors": 15,
+        "capacity": 98,
+        "inspector": "加藤 洋子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.606,
+          35.478
+        ]
+      },
+      "properties": {
+        "id": "FP-086",
+        "name": "横浜中央オフィスタワー",
+        "address": "横浜市中区本牧町1-6",
+        "type": "オフィスビル",
+        "last_inspection": "2024-01-20",
+        "next_inspection": "2025-01-20",
+        "inspection_status": "期限超過",
+        "floors": 18,
+        "capacity": 145,
+        "inspector": "松本 義行"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.648,
+          35.42
+        ]
+      },
+      "properties": {
+        "id": "FP-087",
+        "name": "みなとみらいビル",
+        "address": "横浜市西区岡野2-7-7",
+        "type": "オフィスビル",
+        "last_inspection": "2023-11-05",
+        "next_inspection": "2024-11-05",
+        "inspection_status": "期限超過",
+        "floors": 21,
+        "capacity": 192,
+        "inspector": "井上 文男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6320,
+          35.4030
+        ]
+      },
+      "properties": {
+        "id": "FP-088",
+        "name": "横浜ビジネスセンター",
+        "address": "横浜市南区南太田3-8-8",
+        "type": "オフィスビル",
+        "last_inspection": "2024-05-14",
+        "next_inspection": "2025-05-14",
+        "inspection_status": "期限超過",
+        "floors": 24,
+        "capacity": 239,
+        "inspector": "木村 節子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.614,
+          35.399
+        ]
+      },
+      "properties": {
+        "id": "FP-089",
+        "name": "関内オフィスパーク",
+        "address": "横浜市港南区上大岡東4-1-9",
+        "type": "オフィスビル",
+        "last_inspection": "2024-07-22",
+        "next_inspection": "2025-07-22",
+        "inspection_status": "期限超過",
+        "floors": 27,
+        "capacity": 286,
+        "inspector": "林 哲哉"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.628,
+          35.488
+        ]
+      },
+      "properties": {
+        "id": "FP-090",
+        "name": "港北テクノパーク",
+        "address": "横浜市保土ケ谷区川辺町5-2",
+        "type": "オフィスビル",
+        "last_inspection": "2023-09-18",
+        "next_inspection": "2024-09-18",
+        "inspection_status": "期限超過",
+        "floors": 30,
+        "capacity": 333,
+        "inspector": "清水 啓介"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.592,
+          35.472
+        ]
+      },
+      "properties": {
+        "id": "FP-091",
+        "name": "横浜南ビル",
+        "address": "横浜市旭区鶴ケ峰1-3-1",
+        "type": "オフィスビル",
+        "last_inspection": "2024-02-28",
+        "next_inspection": "2025-02-28",
+        "inspection_status": "期限超過",
+        "floors": 3,
+        "capacity": 380,
+        "inspector": "田中 守"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.646,
+          35.434
+        ]
+      },
+      "properties": {
+        "id": "FP-092",
+        "name": "磯子ビジネスビル",
+        "address": "横浜市磯子区磯子2-4-2",
+        "type": "オフィスビル",
+        "last_inspection": "2024-08-11",
+        "next_inspection": "2025-08-11",
+        "inspection_status": "期限超過",
+        "floors": 6,
+        "capacity": 427,
+        "inspector": "鈴木 孝男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.622,
+          35.444
+        ]
+      },
+      "properties": {
+        "id": "FP-093",
+        "name": "金沢オフィスタワー",
+        "address": "横浜市金沢区泥亀3-5-3",
+        "type": "オフィスビル",
+        "last_inspection": "2024-04-17",
+        "next_inspection": "2025-04-17",
+        "inspection_status": "期限超過",
+        "floors": 9,
+        "capacity": 474,
+        "inspector": "佐藤 敏雄"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.608,
+          35.432
+        ]
+      },
+      "properties": {
+        "id": "FP-094",
+        "name": "保土ケ谷産業ビル",
+        "address": "横浜市港北区大豆戸町46",
+        "type": "オフィスビル",
+        "last_inspection": "2023-06-10",
+        "next_inspection": "2024-06-10",
+        "inspection_status": "違反あり",
+        "floors": 12,
+        "capacity": 521,
+        "inspector": "高橋 理恵"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.594,
+          35.466
+        ]
+      },
+      "properties": {
+        "id": "FP-095",
+        "name": "横浜駅前オフィスビル",
+        "address": "横浜市緑区寺山町57",
+        "type": "オフィスビル",
+        "last_inspection": "2022-12-15",
+        "next_inspection": "2023-12-15",
+        "inspection_status": "違反あり",
+        "floors": 15,
+        "capacity": 568,
+        "inspector": "渡辺 博之"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.594,
+          35.484
+        ]
+      },
+      "properties": {
+        "id": "FP-096",
+        "name": "横浜市役所",
+        "address": "横浜市中区関内1-8-6",
+        "type": "その他",
+        "last_inspection": "2023-03-22",
+        "next_inspection": "2024-03-22",
+        "inspection_status": "違反あり",
+        "floors": 18,
+        "capacity": 615,
+        "inspector": "伊藤 勝利"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.652,
+          35.425
+        ]
+      },
+      "properties": {
+        "id": "FP-097",
+        "name": "横浜中央図書館",
+        "address": "横浜市中区山下町2-1",
+        "type": "その他",
+        "last_inspection": "2023-09-05",
+        "next_inspection": "2024-09-05",
+        "inspection_status": "違反あり",
+        "floors": 21,
+        "capacity": 662,
+        "inspector": "山本 光代"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.636,
+          35.41
+        ]
+      },
+      "properties": {
+        "id": "FP-098",
+        "name": "港北区民センター",
+        "address": "横浜市中区本牧町3-2",
+        "type": "その他",
+        "last_inspection": "2022-08-20",
+        "next_inspection": "2023-08-20",
+        "inspection_status": "違反あり",
+        "floors": 24,
+        "capacity": 709,
+        "inspector": "中村 三郎"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.619,
+          35.399
+        ]
+      },
+      "properties": {
+        "id": "FP-099",
+        "name": "横浜市立体育館",
+        "address": "横浜市西区岡野4-3-9",
+        "type": "その他",
+        "last_inspection": "2023-11-01",
+        "next_inspection": "2024-11-01",
+        "inspection_status": "違反あり",
+        "floors": 27,
+        "capacity": 756,
+        "inspector": "小林 和夫"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.631,
+          35.468
+        ]
+      },
+      "properties": {
+        "id": "FP-100",
+        "name": "保土ケ谷福祉センター",
+        "address": "横浜市南区南太田5-4-10",
+        "type": "その他",
+        "last_inspection": "2023-01-15",
+        "next_inspection": "2024-01-15",
+        "inspection_status": "違反あり",
+        "floors": 30,
+        "capacity": 803,
+        "inspector": "加藤 洋子"
+      }
+    }
+  ]
+}

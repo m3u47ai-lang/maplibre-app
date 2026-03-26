@@ -1,0 +1,125 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6382, 35.4480] },
+      "properties": {
+        "id": 1,
+        "name": "中消防署",
+        "address": "横浜市中区住吉町1-1",
+        "tel": "045-251-0119",
+        "vehicles_count": 12,
+        "district": "中区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6220, 35.4560] },
+      "properties": {
+        "id": 2,
+        "name": "西消防署",
+        "address": "横浜市西区岡野1-5-16",
+        "tel": "045-311-0119",
+        "vehicles_count": 10,
+        "district": "西区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6210, 35.4250] },
+      "properties": {
+        "id": 3,
+        "name": "南消防署",
+        "address": "横浜市南区浦舟町3-46",
+        "tel": "045-742-0119",
+        "vehicles_count": 11,
+        "district": "南区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6070, 35.3940] },
+      "properties": {
+        "id": 4,
+        "name": "港南消防署",
+        "address": "横浜市港南区港南中央通8-1",
+        "tel": "045-842-0119",
+        "vehicles_count": 9,
+        "district": "港南区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5940, 35.4620] },
+      "properties": {
+        "id": 5,
+        "name": "保土ケ谷消防署",
+        "address": "横浜市保土ケ谷区川辺町2-18",
+        "tel": "045-331-0119",
+        "vehicles_count": 10,
+        "district": "保土ケ谷区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5680, 35.4730] },
+      "properties": {
+        "id": 6,
+        "name": "旭消防署",
+        "address": "横浜市旭区鶴ケ峰1-4-11",
+        "tel": "045-951-0119",
+        "vehicles_count": 11,
+        "district": "旭区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6370, 35.4030] },
+      "properties": {
+        "id": 7,
+        "name": "磯子消防署",
+        "address": "横浜市磯子区磯子3-8-35",
+        "tel": "045-752-0119",
+        "vehicles_count": 9,
+        "district": "磯子区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6310, 35.3620] },
+      "properties": {
+        "id": 8,
+        "name": "金沢消防署",
+        "address": "横浜市金沢区泥亀1-23-5",
+        "tel": "045-784-0119",
+        "vehicles_count": 10,
+        "district": "金沢区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6440, 35.5330] },
+      "properties": {
+        "id": 9,
+        "name": "港北消防署",
+        "address": "横浜市港北区大豆戸町515",
+        "tel": "045-546-0119",
+        "vehicles_count": 13,
+        "district": "港北区"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5730, 35.5260] },
+      "properties": {
+        "id": 10,
+        "name": "緑消防署",
+        "address": "横浜市緑区寺山町290",
+        "tel": "045-931-0119",
+        "vehicles_count": 10,
+        "district": "緑区"
+      }
+    }
+  ]
+}
