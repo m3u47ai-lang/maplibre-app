@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>予防管理ビュー — 横浜市消防局</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      background: #f0f2f8;
+    }
+
+    #prev-main {
+      display: flex;
+      flex: 1;
+      margin-top: 40px;
+      overflow: hidden;
+    }
+
+    /* 左：フィルタパネル */
+    #filter-panel {
+      width: 220px;
+      background: #fff;
+      border-right: 1px solid #dde0ea;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .filter-header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      flex-shrink: 0;
+    }
+
+    .filter-section {
+      padding: 12px 14px;
+      border-bottom: 1px solid #eaecf4;
+    }
+
+    .filter-section-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .filter-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 0;
+      font-size: 0.8rem;
+      color: #333;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .filter-checkbox input[type="checkbox"] {
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .cat-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    #route-btn {
+      margin: 14px;
+      padding: 9px;
+      background: #4361ee;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    #route-btn:hover { background: #3451d1; }
+
+    #filter-summary {
+      padding: 10px 14px;
+      font-size: 0.72rem;
+      color: #666;
+      background: #f8f8fc;
+      border-top: 1px solid #eaecf4;
+      margin-top: auto;
+    }
+
+    /* 中央：地図 */
+    #prev-map-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #prev-map {
+      flex: 1;
+    }
+
+    /* テーブルエリア */
+    #attr-table-wrap {
+      height: 180px;
+      background: #fff;
+      border-top: 1px solid #dde0ea;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .table-header-bar {
+      background: #f4f5fb;
+      border-bottom: 1px solid #dde0ea;
+      padding: 7px 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    #attr-table-container {
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    #attr-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.76rem;
+    }
+
+    #attr-table th {
+      background: #f0f2f8;
+      color: #666;
+      font-weight: 600;
+      padding: 5px 10px;
+      text-align: left;
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid #dde0ea;
+      font-size: 0.7rem;
+      white-space: nowrap;
+    }
+
+    #attr-table td {
+      padding: 5px 10px;
+      border-bottom: 1px solid #f0f0f8;
+      color: #333;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    #attr-table tr:hover td {
+      background: #eef1fc;
+    }
+
+    .tbl-status {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+    .tbl-status.ok       { background:#e8f8ee; color:#2a8a2a; }
+    .tbl-status.uninsp   { background:#fffbe8; color:#aa8800; }
+    .tbl-status.overdue  { background:#fff0f0; color:#cc3333; }
+    .tbl-status.violation{ background:#fde8f8; color:#882288; }
+
+    /* 右：詳細パネル */
+    #detail-panel {
+      width: 260px;
+      background: #fff;
+      border-left: 1px solid #dde0ea;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .detail-header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    #detail-content {
+      padding: 14px;
+      overflow-y: auto;
+      flex: 1;
+      font-size: 0.8rem;
+      color: #333;
+    }
+
+    .detail-empty {
+      color: #aaa;
+      text-align: center;
+      padding-top: 40px;
+      font-size: 0.78rem;
+    }
+
+    .detail-field {
+      margin-bottom: 10px;
+    }
+
+    .detail-label {
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+
+    .detail-value {
+      color: #1a1a2e;
+      font-size: 0.82rem;
+    }
+
+    .detail-cat-badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .detail-status-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .detail-status-badge.ok       { background:#e8f8ee; color:#2a8a2a; }
+    .detail-status-badge.uninsp   { background:#fffbe8; color:#aa8800; }
+    .detail-status-badge.overdue  { background:#fff0f0; color:#cc3333; }
+    .detail-status-badge.violation{ background:#fde8f8; color:#882288; }
+
+    #inspect-btn {
+      margin: 14px;
+      padding: 9px;
+      background: #e8f0fe;
+      color: #4361ee;
+      border: 1px solid #c5d0f8;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+      flex-shrink: 0;
+      display: none;
+    }
+
+    #inspect-btn:hover { background: #dce4ff; }
+
+    /* 点滅アニメーション（期限超過） */
+    @keyframes blinkPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    /* 凡例 */
+    #prev-legend {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #dde0ea;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.72rem;
+      color: #555;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+
+    .legend-section-title {
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .legend-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(0,0,0,0.15);
+    }
+
+    #route-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    #route-modal.open { display: flex; }
+    #route-modal-inner {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      min-width: 320px;
+      max-width: 480px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    #route-modal h3 { font-size: 1rem; color: #1a1a2e; margin-bottom: 12px; }
+    .route-list { list-style: none; margin-bottom: 16px; }
+    .route-list li {
+      padding: 6px 10px;
+      border-bottom: 1px solid #eee;
+      font-size: 0.82rem;
+      color: #333;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .route-num {
+      background: #4361ee;
+      color: #fff;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    #route-close-btn {
+      padding: 8px 20px;
+      background: #4361ee;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 共通ナビゲーション -->
+  <nav id="global-nav">
+    <span class="nav-brand">横浜市消防局 GIS</span>
+    <a href="index.html" class="nav-link">既存マップ</a>
+    <a href="dispatch.html" class="nav-link">指令管制</a>
+    <a href="prevention.html" class="nav-link active">予防管理</a>
+    <a href="dashboard.html" class="nav-link">ダッシュボード</a>
+  </nav>
+
+  <div id="prev-main">
+    <!-- 左：フィルタパネル -->
+    <div id="filter-panel">
+      <div class="filter-header">フィルタ条件</div>
+
+      <div class="filter-section">
+        <div class="filter-section-title">対象種別</div>
+        <label class="filter-checkbox"><input type="checkbox" class="type-check" value="防火対象物" checked><span>防火対象物</span></label>
+        <label class="filter-checkbox"><input type="checkbox" class="type-check" value="危険物施設" checked><span>危険物施設</span></label>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-section-title">危険物種別（危険物施設）</div>
+        <label class="filter-checkbox"><input type="checkbox" class="cat-check" value="第1類" checked><div class="cat-dot" style="background:#f4a261"></div><span>第1類（酸化性固体）</span></label>
+        <label class="filter-checkbox"><input type="checkbox" class="cat-check" value="第2類" checked><div class="cat-dot" style="background:#e9c46a"></div><span>第2類（可燃性固体）</span></label>
+        <label class="filter-checkbox"><input type="checkbox" class="cat-check" value="第3類" checked><div class="cat-dot" style="background:#2a9d8f"></div><span>第3類（自然発火性）</span></label>
+        <label class="filter-checkbox"><input type="checkbox" class="cat-check" value="第4類" checked><div class="cat-dot" style="background:#e63946"></div><span>第4類（引火性液体）</span></label>
+        <label class="filter-checkbox"><input type="checkbox" class="cat-check" value="第5類" checked><div class="cat-dot" style="background:#9b5de5"></div><span>第5類（自己反応性）</span></label>
+        <label class="filter-checkbox"><input type="checkbox" class="cat-check" value="第6類" checked><div class="cat-dot" style="background:#0077cc"></div><span>第6類（酸化性液体）</span></label>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-section-title">査察状況</div>
+        <label class="filter-checkbox"><input type="checkbox" class="status-check" value="正常" checked><span>正常</span></label>
+        <label class="filter-checkbox"><input type="checkbox" class="status-check" value="未実施" checked><span>未実施</span></label>
+        <label class="filter-checkbox"><input type="checkbox" class="status-check" value="期限超過" checked><span>期限超過</span></label>
+        <label class="filter-checkbox"><input type="checkbox" class="status-check" value="違反あり" checked><span>違反あり</span></label>
+      </div>
+
+      <button id="route-btn">査察ルート最適化</button>
+
+      <div id="filter-summary">表示中: <strong id="visible-count">0</strong> 件</div>
+    </div>
+
+    <!-- 中央：地図 + テーブル -->
+    <div id="prev-map-wrap">
+      <div id="prev-map">
+        <div id="prev-legend">
+          <div class="legend-section-title">危険物種別</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#f4a261"></div>第1類</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e9c46a"></div>第2類</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#2a9d8f"></div>第3類</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e63946"></div>第4類（引火性）</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#9b5de5"></div>第5類</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#0077cc"></div>第6類</div>
+          <div style="margin-top:8px;">
+          <div class="legend-section-title">防火対象物</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#555;border-radius:2px;width:11px;height:11px"></div>防火対象物</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="attr-table-wrap">
+        <div class="table-header-bar">
+          属性テーブル
+          <span id="table-count" style="margin-left:auto;background:#eef1fc;color:#4361ee;padding:1px 8px;border-radius:10px;font-size:0.68rem;">0件</span>
+        </div>
+        <div id="attr-table-container">
+          <table id="attr-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>施設名</th>
+                <th>種別</th>
+                <th>最終査察日</th>
+                <th>次回予定</th>
+                <th>査察状況</th>
+              </tr>
+            </thead>
+            <tbody id="attr-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：詳細パネル -->
+    <div id="detail-panel">
+      <div class="detail-header">施設詳細</div>
+      <div id="detail-content">
+        <div class="detail-empty">地図上の施設をクリックしてください</div>
+      </div>
+      <button id="inspect-btn">査察記録を表示</button>
+    </div>
+  </div>
+
+  <!-- 査察ルートモーダル -->
+  <div id="route-modal">
+    <div id="route-modal-inner">
+      <h3>査察ルート最適化</h3>
+      <p style="font-size:0.8rem;color:#666;margin-bottom:12px;">期限超過・違反施設を優先した推奨訪問順序：</p>
+      <ul class="route-list" id="route-list"></ul>
+      <button id="route-close-btn">閉じる</button>
+    </div>
+  </div>
+
+  <script>
+    // ---- カテゴリ別色 ----
+    const CAT_COLORS = {
+      '第1類': '#f4a261',
+      '第2類': '#e9c46a',
+      '第3類': '#2a9d8f',
+      '第4類': '#e63946',
+      '第5類': '#9b5de5',
+      '第6類': '#0077cc',
+    };
+
+    const STATUS_CLASS = {
+      '正常':   'ok',
+      '未実施': 'uninsp',
+      '期限超過': 'overdue',
+      '違反あり': 'violation',
+    };
+
+    // ---- ダミーデータ（hazmat_facilities が読み込めない場合のフォールバック） ----
+    const HAZMAT_DUMMY = (() => {
+      const cats = ['第1類','第2類','第3類','第4類','第4類','第4類','第5類','第6類'];
+      const statuses = ['正常','正常','正常','期限超過','違反あり','未実施'];
+      const names = ['石油販売所','化学工業','ガソリンスタンド','塗料倉庫','溶剤製造','薬品工場','有機溶剤販売'];
+      const features = [];
+      for (let i = 0; i < 50; i++) {
+        const cat = cats[i % cats.length];
+        const status = statuses[i % statuses.length];
+        const lng = 139.6380 + (Math.random()-0.5)*0.08;
+        const lat = 35.4437 + (Math.random()-0.5)*0.06;
+        features.push({
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: [lng, lat] },
+          properties: {
+            id: `HM-${String(i+1).padStart(3,'0')}`,
+            name: `${['中区','西区','南区','港南区','保土ケ谷区'][i%5]}${names[i%names.length]}${i+1}号`,
+            address: `横浜市${['中区','西区','南区'][i%3]}${i+1}-${(i%10)+1}`,
+            category: cat,
+            last_inspection: `2024-${String((i%12)+1).padStart(2,'0')}-15`,
+            next_inspection: `2025-${String((i%12)+1).padStart(2,'0')}-15`,
+            inspection_status: status,
+            storage_amount: `${(i+1)*100}L`,
+            manager: `担当者${i+1}`,
+            _source: 'hazmat',
+          },
+        });
+      }
+      return { type: 'FeatureCollection', features };
+    })();
+
+    const FP_DUMMY = (() => {
+      const types = ['ホテル・旅館','病院・福祉施設','学校','百貨店・商業施設','工場・倉庫','集合住宅','飲食店','オフィスビル'];
+      const statuses = ['正常','正常','正常','未実施','期限超過','違反あり'];
+      const features = [];
+      for (let i = 0; i < 100; i++) {
+        const status = statuses[i % statuses.length];
+        const lng = 139.6380 + (Math.random()-0.5)*0.10;
+        const lat = 35.4437 + (Math.random()-0.5)*0.08;
+        features.push({
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: [lng, lat] },
+          properties: {
+            id: `FP-${String(i+1).padStart(3,'0')}`,
+            name: `${['横浜','みなとみらい','桜木町','関内','石川町'][i%5]}${types[i%types.length]}${Math.floor(i/5)+1}`,
+            address: `横浜市${['中区','西区','南区','港南区'][i%4]}${i+1}-${(i%8)+1}`,
+            type: types[i % types.length],
+            last_inspection: `2024-${String((i%12)+1).padStart(2,'0')}-10`,
+            next_inspection: `2025-${String((i%12)+1).padStart(2,'0')}-10`,
+            inspection_status: status,
+            floors: (i % 20) + 2,
+            capacity: (i + 1) * 30,
+            inspector: `査察員${(i%5)+1}`,
+            _source: 'fp',
+          },
+        });
+      }
+      return { type: 'FeatureCollection', features };
+    })();
+
+    // ---- 全データ ----
+    let allHazmat = HAZMAT_DUMMY;
+    let allFP = FP_DUMMY;
+
+    // ---- 地図初期化 ----
+    const map = new maplibregl.Map({
+      container: 'prev-map',
+      style: 'https://tile.openstreetmap.jp/styles/osm-bright/style.json',
+      center: [139.6380, 35.4437],
+      zoom: 12,
+    });
+
+    map.addControl(new maplibregl.NavigationControl(), 'top-left');
+
+    let popup = null;
+
+    map.on('load', () => {
+      // 実データ読み込み試行
+      Promise.all([
+        fetch('data/hazmat_facilities.geojson').then(r => r.json()).catch(() => null),
+        fetch('data/fire_prevention_targets.geojson').then(r => r.json()).catch(() => null),
+      ]).then(([hazmat, fp]) => {
+        if (hazmat) {
+          hazmat.features.forEach(f => { f.properties._source = 'hazmat'; });
+          allHazmat = hazmat;
+        }
+        if (fp) {
+          fp.features.forEach(f => { f.properties._source = 'fp'; });
+          allFP = fp;
+        }
+        initLayers();
+        applyFilters();
+      });
+    });
+
+    function initLayers() {
+      // 管轄区域
+      map.addSource('prev-districts', { type:'geojson', data:'data/districts.geojson' });
+      map.addLayer({ id:'prev-dist-fill', type:'fill', source:'prev-districts',
+        paint: { 'fill-color':['get','color'], 'fill-opacity':0.08 } });
+      map.addLayer({ id:'prev-dist-line', type:'line', source:'prev-districts',
+        paint: { 'line-color':['get','color'], 'line-width':1, 'line-dasharray':[4,2] } });
+
+      // 防火対象物（四角形アイコン）
+      map.addSource('fp-source', { type:'geojson', data: { type:'FeatureCollection', features:[] } });
+      map.addLayer({
+        id: 'fp-layer',
+        type: 'circle',
+        source: 'fp-source',
+        paint: {
+          'circle-radius': 5,
+          'circle-color': '#555566',
+          'circle-stroke-width': 1.5,
+          'circle-stroke-color': '#fff',
+          'circle-opacity': 0.8,
+        },
+      });
+
+      // 危険物施設（カテゴリ別色）
+      map.addSource('hazmat-source', { type:'geojson', data: { type:'FeatureCollection', features:[] } });
+      map.addLayer({
+        id: 'hazmat-layer',
+        type: 'circle',
+        source: 'hazmat-source',
+        paint: {
+          'circle-radius': [
+            'match', ['get','category'],
+            '第4類', 9, 7,
+          ],
+          'circle-color': [
+            'match', ['get','category'],
+            '第1類','#f4a261',
+            '第2類','#e9c46a',
+            '第3類','#2a9d8f',
+            '第4類','#e63946',
+            '第5類','#9b5de5',
+            '第6類','#0077cc',
+            '#888',
+          ],
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#fff',
+          'circle-opacity': ['case',
+            ['any',
+              ['==',['get','inspection_status'],'期限超過'],
+              ['==',['get','inspection_status'],'違反あり']
+            ], 1.0, 0.85
+          ],
+        },
+      });
+
+      // クリックハンドラ
+      ['hazmat-layer','fp-layer'].forEach(layerId => {
+        map.on('mouseenter', layerId, () => { map.getCanvas().style.cursor = 'pointer'; });
+        map.on('mouseleave', layerId, () => { map.getCanvas().style.cursor = ''; });
+        map.on('click', layerId, (e) => {
+          if (!e.features || !e.features[0]) return;
+          showDetail(e.features[0].properties);
+        });
+      });
+
+      // 点滅アニメーション（期限超過）
+      let blink = true;
+      setInterval(() => {
+        blink = !blink;
+        if (map.getLayer('hazmat-layer')) {
+          try {
+            map.setPaintProperty('hazmat-layer', 'circle-opacity', [
+              'case',
+              ['==',['get','inspection_status'],'期限超過'], blink ? 1.0 : 0.2,
+              ['==',['get','inspection_status'],'違反あり'], 1.0,
+              0.85
+            ]);
+            map.setPaintProperty('fp-layer', 'circle-opacity', [
+              'case',
+              ['==',['get','inspection_status'],'期限超過'], blink ? 1.0 : 0.2,
+              ['==',['get','inspection_status'],'違反あり'], 1.0,
+              0.8
+            ]);
+          } catch(e) {}
+        }
+      }, 700);
+    }
+
+    // ---- フィルタ適用 ----
+    function getFilteredData() {
+      const enabledTypes = [...document.querySelectorAll('.type-check:checked')].map(c => c.value);
+      const enabledCats  = [...document.querySelectorAll('.cat-check:checked')].map(c => c.value);
+      const enabledStats = [...document.querySelectorAll('.status-check:checked')].map(c => c.value);
+
+      const hazmatFeatures = enabledTypes.includes('危険物施設')
+        ? allHazmat.features.filter(f =>
+            enabledCats.includes(f.properties.category) &&
+            enabledStats.includes(f.properties.inspection_status))
+        : [];
+
+      const fpFeatures = enabledTypes.includes('防火対象物')
+        ? allFP.features.filter(f => enabledStats.includes(f.properties.inspection_status))
+        : [];
+
+      return { hazmatFeatures, fpFeatures };
+    }
+
+    function applyFilters() {
+      const { hazmatFeatures, fpFeatures } = getFilteredData();
+
+      if (map.getSource('hazmat-source')) {
+        map.getSource('hazmat-source').setData({ type:'FeatureCollection', features: hazmatFeatures });
+      }
+      if (map.getSource('fp-source')) {
+        map.getSource('fp-source').setData({ type:'FeatureCollection', features: fpFeatures });
+      }
+
+      const total = hazmatFeatures.length + fpFeatures.length;
+      document.getElementById('visible-count').textContent = total;
+      document.getElementById('table-count').textContent = total + '件';
+
+      updateTable([...hazmatFeatures, ...fpFeatures]);
+    }
+
+    function updateTable(features) {
+      const tbody = document.getElementById('attr-table-body');
+      tbody.innerHTML = features.slice(0, 200).map(f => {
+        const p = f.properties;
+        const sClass = STATUS_CLASS[p.inspection_status] || '';
+        return `<tr onclick="showDetail(${JSON.stringify(JSON.stringify(p)).slice(1,-1)})">
+          <td>${p.id}</td>
+          <td>${p.name}</td>
+          <td>${p.category || p.type || '―'}</td>
+          <td>${p.last_inspection || '―'}</td>
+          <td>${p.next_inspection || '―'}</td>
+          <td><span class="tbl-status ${sClass}">${p.inspection_status}</span></td>
+        </tr>`;
+      }).join('');
+    }
+
+    function showDetail(propsOrJson) {
+      const p = typeof propsOrJson === 'string' ? JSON.parse(propsOrJson) : propsOrJson;
+      const sClass = STATUS_CLASS[p.inspection_status] || '';
+      const isHazmat = p._source === 'hazmat' || p.category;
+      const content = document.getElementById('detail-content');
+      content.innerHTML = `
+        <div class="detail-field">
+          <div class="detail-label">施設名</div>
+          <div class="detail-value" style="font-weight:700;font-size:0.9rem">${p.name}</div>
+        </div>
+        <div class="detail-field">
+          <div class="detail-label">所在地</div>
+          <div class="detail-value">${p.address}</div>
+        </div>
+        ${isHazmat ? `
+        <div class="detail-field">
+          <div class="detail-label">危険物種別</div>
+          <div class="detail-value">
+            <span class="detail-cat-badge" style="background:${CAT_COLORS[p.category]||'#888'}">${p.category}</span>
+          </div>
+        </div>
+        <div class="detail-field">
+          <div class="detail-label">貯蔵量</div>
+          <div class="detail-value">${p.storage_amount || '―'}</div>
+        </div>
+        ` : `
+        <div class="detail-field">
+          <div class="detail-label">用途種別</div>
+          <div class="detail-value">${p.type || '―'}</div>
+        </div>
+        <div class="detail-field">
+          <div class="detail-label">階数 / 収容人員</div>
+          <div class="detail-value">${p.floors || '―'} 階 / ${p.capacity || '―'} 人</div>
+        </div>
+        `}
+        <div class="detail-field">
+          <div class="detail-label">査察状況</div>
+          <div class="detail-value">
+            <span class="detail-status-badge ${sClass}">${p.inspection_status}</span>
+          </div>
+        </div>
+        <div class="detail-field">
+          <div class="detail-label">最終査察日</div>
+          <div class="detail-value">${p.last_inspection || '―'}</div>
+        </div>
+        <div class="detail-field">
+          <div class="detail-label">次回査察予定</div>
+          <div class="detail-value">${p.next_inspection || '―'}</div>
+        </div>
+        <div class="detail-field">
+          <div class="detail-label">担当者</div>
+          <div class="detail-value">${p.manager || p.inspector || '―'}</div>
+        </div>
+      `;
+      document.getElementById('inspect-btn').style.display = 'block';
+    }
+
+    // フィルタ変更イベント
+    document.querySelectorAll('.type-check,.cat-check,.status-check').forEach(el => {
+      el.addEventListener('change', applyFilters);
+    });
+
+    // 査察ルート最適化
+    document.getElementById('route-btn').addEventListener('click', () => {
+      const { hazmatFeatures, fpFeatures } = getFilteredData();
+      const priority = [...hazmatFeatures, ...fpFeatures]
+        .filter(f => ['違反あり','期限超過','未実施'].includes(f.properties.inspection_status))
+        .slice(0, 8);
+
+      const list = document.getElementById('route-list');
+      if (priority.length === 0) {
+        list.innerHTML = '<li><span>優先施設なし（全施設が正常です）</span></li>';
+      } else {
+        list.innerHTML = priority.map((f, i) => {
+          const p = f.properties;
+          return `<li>
+            <span class="route-num">${i+1}</span>
+            <span><strong>${p.name}</strong> — ${p.inspection_status} (${p.address})</span>
+          </li>`;
+        }).join('');
+      }
+
+      document.getElementById('route-modal').classList.add('open');
+    });
+
+    document.getElementById('route-close-btn').addEventListener('click', () => {
+      document.getElementById('route-modal').classList.remove('open');
+    });
+
+    document.getElementById('inspect-btn').addEventListener('click', () => {
+      alert('査察記録システムとの連携機能（実装予定）');
+    });
+  </script>
+</body>
+</html>

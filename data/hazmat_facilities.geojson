@@ -1,0 +1,755 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6412, 35.4501] },
+      "properties": {
+        "id": "HM-001",
+        "name": "中央石油販売所",
+        "address": "横浜市中区山下町15-3",
+        "category": "第4類",
+        "last_inspection": "2025-06-10",
+        "next_inspection": "2026-06-10",
+        "inspection_status": "正常",
+        "storage_amount": "5000L",
+        "manager": "田中 誠一"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6355, 35.4463] },
+      "properties": {
+        "id": "HM-002",
+        "name": "横浜化学工業株式会社",
+        "address": "横浜市中区本牧町2-8",
+        "category": "第3類",
+        "last_inspection": "2025-09-22",
+        "next_inspection": "2026-09-22",
+        "inspection_status": "正常",
+        "storage_amount": "800kg",
+        "manager": "鈴木 洋介"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6280, 35.4520] },
+      "properties": {
+        "id": "HM-003",
+        "name": "西区ガソリンスタンド",
+        "address": "横浜市西区浅間町3-12-1",
+        "category": "第4類",
+        "last_inspection": "2024-03-15",
+        "next_inspection": "2025-03-15",
+        "inspection_status": "期限超過",
+        "storage_amount": "10000L",
+        "manager": "佐藤 健太"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6190, 35.4310] },
+      "properties": {
+        "id": "HM-004",
+        "name": "南横浜塗料工業",
+        "address": "横浜市南区南太田3-7-2",
+        "category": "第2類",
+        "last_inspection": "2025-11-05",
+        "next_inspection": "2026-11-05",
+        "inspection_status": "正常",
+        "storage_amount": "2000L",
+        "manager": "高橋 美奈"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6150, 35.4280] },
+      "properties": {
+        "id": "HM-005",
+        "name": "港南化成株式会社",
+        "address": "横浜市南区六ッ川1-5-9",
+        "category": "第1類",
+        "last_inspection": "2023-07-20",
+        "next_inspection": "2024-07-20",
+        "inspection_status": "期限超過",
+        "storage_amount": "300kg",
+        "manager": "渡辺 浩二"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6080, 35.4000] },
+      "properties": {
+        "id": "HM-006",
+        "name": "港南石油販売",
+        "address": "横浜市港南区港南2-1-8",
+        "category": "第1類",
+        "last_inspection": "2025-08-18",
+        "next_inspection": "2026-08-18",
+        "inspection_status": "正常",
+        "storage_amount": "8000L",
+        "manager": "伊藤 俊彦"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6010, 35.3960] },
+      "properties": {
+        "id": "HM-007",
+        "name": "上永谷ガソリンスタンド",
+        "address": "横浜市港南区上永谷5-3-1",
+        "category": "第4類",
+        "last_inspection": "2024-01-10",
+        "next_inspection": "2025-01-10",
+        "inspection_status": "期限超過",
+        "storage_amount": "12000L",
+        "manager": "山本 裕子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5980, 35.4650] },
+      "properties": {
+        "id": "HM-008",
+        "name": "保土ケ谷化学薬品販売",
+        "address": "横浜市保土ケ谷区帷子町2-5",
+        "category": "第6類",
+        "last_inspection": "2025-04-22",
+        "next_inspection": "2026-04-22",
+        "inspection_status": "正常",
+        "storage_amount": "500kg",
+        "manager": "中村 大輔"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5900, 35.4580] },
+      "properties": {
+        "id": "HM-009",
+        "name": "星川石油販売所",
+        "address": "横浜市保土ケ谷区星川1-8-3",
+        "category": "第3類",
+        "last_inspection": "2025-10-30",
+        "next_inspection": "2026-10-30",
+        "inspection_status": "正常",
+        "storage_amount": "6000L",
+        "manager": "小林 恵子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5720, 35.4780] },
+      "properties": {
+        "id": "HM-010",
+        "name": "旭区金属加工工場",
+        "address": "横浜市旭区二俣川1-2-11",
+        "category": "第2類",
+        "last_inspection": "2024-05-14",
+        "next_inspection": "2025-05-14",
+        "inspection_status": "期限超過",
+        "storage_amount": "200kg",
+        "manager": "加藤 修"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5650, 35.4700] },
+      "properties": {
+        "id": "HM-011",
+        "name": "旭ガソリンスタンド",
+        "address": "横浜市旭区鶴ケ峰2-10-5",
+        "category": "第2類",
+        "last_inspection": "2025-07-08",
+        "next_inspection": "2026-07-08",
+        "inspection_status": "正常",
+        "storage_amount": "9000L",
+        "manager": "松本 誠"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6400, 35.4060] },
+      "properties": {
+        "id": "HM-012",
+        "name": "磯子工業薬品",
+        "address": "横浜市磯子区磯子5-2-7",
+        "category": "第6類",
+        "last_inspection": "2025-02-28",
+        "next_inspection": "2026-02-28",
+        "inspection_status": "正常",
+        "storage_amount": "400kg",
+        "manager": "井上 直樹"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6330, 35.4010] },
+      "properties": {
+        "id": "HM-013",
+        "name": "磯子石油販売",
+        "address": "横浜市磯子区杉田1-6-3",
+        "category": "第4類",
+        "last_inspection": "2023-11-15",
+        "next_inspection": "2024-11-15",
+        "inspection_status": "期限超過",
+        "storage_amount": "7500L",
+        "manager": "木村 義雄"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6350, 35.3680] },
+      "properties": {
+        "id": "HM-014",
+        "name": "金沢化学工業",
+        "address": "横浜市金沢区大道2-9-1",
+        "category": "第3類",
+        "last_inspection": "2023-05-20",
+        "next_inspection": "2024-05-20",
+        "inspection_status": "違反あり",
+        "storage_amount": "600kg",
+        "manager": "林 政男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6270, 35.3590] },
+      "properties": {
+        "id": "HM-015",
+        "name": "金沢ガソリンスタンド",
+        "address": "横浜市金沢区能見台1-3-8",
+        "category": "第1類",
+        "last_inspection": "2025-12-01",
+        "next_inspection": "2026-12-01",
+        "inspection_status": "正常",
+        "storage_amount": "11000L",
+        "manager": "清水 香織"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6480, 35.5350] },
+      "properties": {
+        "id": "HM-016",
+        "name": "港北石油販売",
+        "address": "横浜市港北区大倉山3-5-2",
+        "category": "第5類",
+        "last_inspection": "2025-08-25",
+        "next_inspection": "2026-08-25",
+        "inspection_status": "正常",
+        "storage_amount": "4500L",
+        "manager": "山田 哲也"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6520, 35.5280] },
+      "properties": {
+        "id": "HM-017",
+        "name": "新横浜化成工業",
+        "address": "横浜市港北区新横浜2-7-11",
+        "category": "第5類",
+        "last_inspection": "2024-09-10",
+        "next_inspection": "2025-09-10",
+        "inspection_status": "期限超過",
+        "storage_amount": "350kg",
+        "manager": "岡田 真一"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5780, 35.5230] },
+      "properties": {
+        "id": "HM-018",
+        "name": "緑区塗料販売",
+        "address": "横浜市緑区長津田6-1-5",
+        "category": "第2類",
+        "last_inspection": "2025-03-14",
+        "next_inspection": "2026-03-14",
+        "inspection_status": "正常",
+        "storage_amount": "3000L",
+        "manager": "前田 光男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5690, 35.5310] },
+      "properties": {
+        "id": "HM-019",
+        "name": "十日市場ガソリンスタンド",
+        "address": "横浜市緑区十日市場町2-3",
+        "category": "第6類",
+        "last_inspection": "2025-10-05",
+        "next_inspection": "2026-10-05",
+        "inspection_status": "正常",
+        "storage_amount": "8500L",
+        "manager": "藤田 一郎"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6440, 35.4490] },
+      "properties": {
+        "id": "HM-020",
+        "name": "本牧石油株式会社",
+        "address": "横浜市中区本牧荒井10-4",
+        "category": "第1類",
+        "last_inspection": "2025-01-17",
+        "next_inspection": "2026-01-17",
+        "inspection_status": "正常",
+        "storage_amount": "450kg",
+        "manager": "村田 昭彦"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6180, 35.4560] },
+      "properties": {
+        "id": "HM-021",
+        "name": "横浜西部金属工業",
+        "address": "横浜市西区南幸2-4-8",
+        "category": "第2類",
+        "last_inspection": "2023-04-05",
+        "next_inspection": "2024-04-05",
+        "inspection_status": "違反あり",
+        "storage_amount": "150kg",
+        "manager": "橋本 竜二"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6320, 35.4420] },
+      "properties": {
+        "id": "HM-022",
+        "name": "関内化学薬品販売",
+        "address": "横浜市中区相生町3-58",
+        "category": "第6類",
+        "last_inspection": "2025-06-30",
+        "next_inspection": "2026-06-30",
+        "inspection_status": "正常",
+        "storage_amount": "250kg",
+        "manager": "上田 美佐子"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6090, 35.4220] },
+      "properties": {
+        "id": "HM-023",
+        "name": "弘明寺石油販売所",
+        "address": "横浜市南区弘明寺町1-2",
+        "category": "第4類",
+        "last_inspection": "2024-02-22",
+        "next_inspection": "2025-02-22",
+        "inspection_status": "期限超過",
+        "storage_amount": "6500L",
+        "manager": "長谷川 雄一"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5850, 35.4530] },
+      "properties": {
+        "id": "HM-024",
+        "name": "天王町化学工業",
+        "address": "横浜市保土ケ谷区天王町1-6-3",
+        "category": "第3類",
+        "last_inspection": "2025-09-01",
+        "next_inspection": "2026-09-01",
+        "inspection_status": "正常",
+        "storage_amount": "700kg",
+        "manager": "岩崎 健司"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5760, 35.4820] },
+      "properties": {
+        "id": "HM-025",
+        "name": "二俣川ガソリンスタンド",
+        "address": "横浜市旭区二俣川2-8-7",
+        "category": "第3類",
+        "last_inspection": "2025-11-20",
+        "next_inspection": "2026-11-20",
+        "inspection_status": "正常",
+        "storage_amount": "9500L",
+        "manager": "大野 聡"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6460, 35.4000] },
+      "properties": {
+        "id": "HM-026",
+        "name": "根岸工業薬品",
+        "address": "横浜市磯子区新磯子町1-5",
+        "category": "第5類",
+        "last_inspection": "2024-06-18",
+        "next_inspection": "2025-06-18",
+        "inspection_status": "期限超過",
+        "storage_amount": "280kg",
+        "manager": "谷口 幸雄"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6240, 35.3700] },
+      "properties": {
+        "id": "HM-027",
+        "name": "六浦石油販売",
+        "address": "横浜市金沢区六浦1-4-9",
+        "category": "第4類",
+        "last_inspection": "2025-04-10",
+        "next_inspection": "2026-04-10",
+        "inspection_status": "正常",
+        "storage_amount": "7000L",
+        "manager": "石田 浩"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6590, 35.5400] },
+      "properties": {
+        "id": "HM-028",
+        "name": "綱島ガソリンスタンド",
+        "address": "横浜市港北区綱島西2-1-6",
+        "category": "第4類",
+        "last_inspection": "2023-08-25",
+        "next_inspection": "2024-08-25",
+        "inspection_status": "違反あり",
+        "storage_amount": "13000L",
+        "manager": "田村 淳"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5830, 35.5180] },
+      "properties": {
+        "id": "HM-029",
+        "name": "中山化学薬品工業",
+        "address": "横浜市緑区中山町2-10-3",
+        "category": "第3類",
+        "last_inspection": "2025-07-14",
+        "next_inspection": "2026-07-14",
+        "inspection_status": "正常",
+        "storage_amount": "550kg",
+        "manager": "古川 明"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6380, 35.4380] },
+      "properties": {
+        "id": "HM-030",
+        "name": "山下ふ頭石油荷扱",
+        "address": "横浜市中区山下町5-11",
+        "category": "第1類",
+        "last_inspection": "2024-02-05",
+        "next_inspection": "2025-02-05",
+        "inspection_status": "期限超過",
+        "storage_amount": "1200kg",
+        "manager": "黒田 庄司"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6160, 35.4490] },
+      "properties": {
+        "id": "HM-031",
+        "name": "横浜西口危険物倉庫",
+        "address": "横浜市西区北幸1-9-2",
+        "category": "第5類",
+        "last_inspection": "2024-10-12",
+        "next_inspection": "2025-10-12",
+        "inspection_status": "期限超過",
+        "storage_amount": "420kg",
+        "manager": "原田 正彦"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6230, 35.4190] },
+      "properties": {
+        "id": "HM-032",
+        "name": "弘明寺化学工業",
+        "address": "横浜市南区弘明寺町3-8",
+        "category": "第2類",
+        "last_inspection": "2025-08-08",
+        "next_inspection": "2026-08-08",
+        "inspection_status": "正常",
+        "storage_amount": "180kg",
+        "manager": "西村 浩之"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5960, 35.4690] },
+      "properties": {
+        "id": "HM-033",
+        "name": "常盤台石油販売所",
+        "address": "横浜市保土ケ谷区常盤台3-2-1",
+        "category": "第5類",
+        "last_inspection": "2025-05-25",
+        "next_inspection": "2026-05-25",
+        "inspection_status": "正常",
+        "storage_amount": "5500L",
+        "manager": "宮本 裕之"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5600, 35.4760] },
+      "properties": {
+        "id": "HM-034",
+        "name": "左近山化学工業",
+        "address": "横浜市旭区左近山町5-3",
+        "category": "第6類",
+        "last_inspection": "2024-04-03",
+        "next_inspection": "2025-04-03",
+        "inspection_status": "期限超過",
+        "storage_amount": "330kg",
+        "manager": "吉田 浩司"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6300, 35.3900] },
+      "properties": {
+        "id": "HM-035",
+        "name": "杉田石油販売",
+        "address": "横浜市磯子区杉田3-7-5",
+        "category": "第4類",
+        "last_inspection": "2025-09-15",
+        "next_inspection": "2026-09-15",
+        "inspection_status": "正常",
+        "storage_amount": "8200L",
+        "manager": "中島 達也"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6200, 35.3650] },
+      "properties": {
+        "id": "HM-036",
+        "name": "並木化学薬品",
+        "address": "横浜市金沢区並木2-5-8",
+        "category": "第3類",
+        "last_inspection": "2023-12-20",
+        "next_inspection": "2024-12-20",
+        "inspection_status": "違反あり",
+        "storage_amount": "650kg",
+        "manager": "坂本 雄介"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6410, 35.5420] },
+      "properties": {
+        "id": "HM-037",
+        "name": "日吉ガソリンスタンド",
+        "address": "横浜市港北区日吉本町1-11-4",
+        "category": "第4類",
+        "last_inspection": "2025-10-22",
+        "next_inspection": "2026-10-22",
+        "inspection_status": "正常",
+        "storage_amount": "10500L",
+        "manager": "内田 康雄"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5870, 35.5310] },
+      "properties": {
+        "id": "HM-038",
+        "name": "鴨居危険物貯蔵所",
+        "address": "横浜市緑区鴨居2-8-3",
+        "category": "第1類",
+        "last_inspection": "2023-06-01",
+        "next_inspection": "2024-06-01",
+        "inspection_status": "違反あり",
+        "storage_amount": "380kg",
+        "manager": "服部 正治"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6340, 35.4540] },
+      "properties": {
+        "id": "HM-039",
+        "name": "横浜港倉庫危険物棟",
+        "address": "横浜市中区山下町1-1",
+        "category": "第5類",
+        "last_inspection": "2024-11-08",
+        "next_inspection": "2025-11-08",
+        "inspection_status": "期限超過",
+        "storage_amount": "500kg",
+        "manager": "近藤 輝久"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6050, 35.4440] },
+      "properties": {
+        "id": "HM-040",
+        "name": "西部ガソリンスタンド",
+        "address": "横浜市保土ケ谷区和田1-4-7",
+        "category": "第4類",
+        "last_inspection": "2025-03-30",
+        "next_inspection": "2026-03-30",
+        "inspection_status": "正常",
+        "storage_amount": "7800L",
+        "manager": "松田 雅樹"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5840, 35.4830] },
+      "properties": {
+        "id": "HM-041",
+        "name": "上川井化学工業",
+        "address": "横浜市旭区上川井町6-1",
+        "category": "第2類",
+        "last_inspection": "2025-07-28",
+        "next_inspection": "2026-07-28",
+        "inspection_status": "正常",
+        "storage_amount": "220kg",
+        "manager": "池田 正男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6490, 35.4080] },
+      "properties": {
+        "id": "HM-042",
+        "name": "根岸石油荷扱施設",
+        "address": "横浜市磯子区原町1-9-2",
+        "category": "第1類",
+        "last_inspection": "2024-08-19",
+        "next_inspection": "2025-08-19",
+        "inspection_status": "期限超過",
+        "storage_amount": "900kg",
+        "manager": "三宅 弘行"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6390, 35.3750] },
+      "properties": {
+        "id": "HM-043",
+        "name": "金沢八景化学",
+        "address": "横浜市金沢区金沢町3-2",
+        "category": "第6類",
+        "last_inspection": "2025-01-25",
+        "next_inspection": "2026-01-25",
+        "inspection_status": "正常",
+        "storage_amount": "460kg",
+        "manager": "浜田 信一"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6380, 35.5480] },
+      "properties": {
+        "id": "HM-044",
+        "name": "菊名ガソリンスタンド",
+        "address": "横浜市港北区菊名6-8-1",
+        "category": "第4類",
+        "last_inspection": "2025-11-30",
+        "next_inspection": "2026-11-30",
+        "inspection_status": "正常",
+        "storage_amount": "9200L",
+        "manager": "川口 俊明"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5750, 35.5380] },
+      "properties": {
+        "id": "HM-045",
+        "name": "長津田化学薬品工業",
+        "address": "横浜市緑区長津田2-4-6",
+        "category": "第3類",
+        "last_inspection": "2023-06-10",
+        "next_inspection": "2024-06-10",
+        "inspection_status": "違反あり",
+        "storage_amount": "720kg",
+        "manager": "阿部 慶一"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6255, 35.4450] },
+      "properties": {
+        "id": "HM-046",
+        "name": "横浜駅前危険物倉庫",
+        "address": "横浜市西区高島2-6-12",
+        "category": "第6類",
+        "last_inspection": "2025-08-12",
+        "next_inspection": "2026-08-12",
+        "inspection_status": "正常",
+        "storage_amount": "310kg",
+        "manager": "佐々木 満"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6140, 35.4160] },
+      "properties": {
+        "id": "HM-047",
+        "name": "上大岡石油販売所",
+        "address": "横浜市港南区上大岡東1-8-5",
+        "category": "第4類",
+        "last_inspection": "2024-07-05",
+        "next_inspection": "2025-07-05",
+        "inspection_status": "期限超過",
+        "storage_amount": "6800L",
+        "manager": "丸山 英夫"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6020, 35.4560] },
+      "properties": {
+        "id": "HM-048",
+        "name": "西谷化学工業",
+        "address": "横浜市保土ケ谷区西谷町3-5",
+        "category": "第5類",
+        "last_inspection": "2025-10-18",
+        "next_inspection": "2026-10-18",
+        "inspection_status": "正常",
+        "storage_amount": "390kg",
+        "manager": "村上 忠男"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5810, 35.4660] },
+      "properties": {
+        "id": "HM-049",
+        "name": "万騎が原ガソリンスタンド",
+        "address": "横浜市旭区万騎が原2-3-9",
+        "category": "第4類",
+        "last_inspection": "2025-02-14",
+        "next_inspection": "2026-02-14",
+        "inspection_status": "正常",
+        "storage_amount": "8800L",
+        "manager": "柴田 誠二"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6420, 35.4150] },
+      "properties": {
+        "id": "HM-050",
+        "name": "洋光台化学薬品",
+        "address": "横浜市磯子区洋光台4-7-2",
+        "category": "第5類",
+        "last_inspection": "2025-09-28",
+        "next_inspection": "2026-09-28",
+        "inspection_status": "正常",
+        "storage_amount": "470kg",
+        "manager": "野口 昭二"
+      }
+    }
+  ]
+}

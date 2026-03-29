@@ -1,0 +1,285 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6384, 35.4482] },
+      "properties": {
+        "id": "V-01",
+        "name": "中1-ポ1",
+        "type": "消防車",
+        "state": "standby",
+        "destination": "",
+        "station": "中消防署",
+        "heading": 0,
+        "speed": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6225, 35.4563] },
+      "properties": {
+        "id": "V-02",
+        "name": "西1-救1",
+        "type": "救急車",
+        "state": "dispatched",
+        "destination": "横浜市西区浅間町3-5-1",
+        "station": "西消防署",
+        "heading": 45,
+        "speed": 45
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6215, 35.4253] },
+      "properties": {
+        "id": "V-03",
+        "name": "南1-ポ1",
+        "type": "消防車",
+        "state": "dispatched",
+        "destination": "横浜市南区南太田2-8-3",
+        "station": "南消防署",
+        "heading": 270,
+        "speed": 50
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6073, 35.3943] },
+      "properties": {
+        "id": "V-04",
+        "name": "港南1-救1",
+        "type": "救急車",
+        "state": "standby",
+        "destination": "",
+        "station": "港南消防署",
+        "heading": 180,
+        "speed": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5944, 35.4623] },
+      "properties": {
+        "id": "V-05",
+        "name": "保土ケ谷1-ポ1",
+        "type": "消防車",
+        "state": "returning",
+        "destination": "",
+        "station": "保土ケ谷消防署",
+        "heading": 90,
+        "speed": 35
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5683, 35.4733] },
+      "properties": {
+        "id": "V-06",
+        "name": "旭1-救1",
+        "type": "救急車",
+        "state": "dispatched",
+        "destination": "横浜市旭区二俣川1-20-5",
+        "station": "旭消防署",
+        "heading": 315,
+        "speed": 55
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6374, 35.4033] },
+      "properties": {
+        "id": "V-07",
+        "name": "磯子1-ポ1",
+        "type": "消防車",
+        "state": "standby",
+        "destination": "",
+        "station": "磯子消防署",
+        "heading": 0,
+        "speed": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6313, 35.3623] },
+      "properties": {
+        "id": "V-08",
+        "name": "金沢1-救1",
+        "type": "救急車",
+        "state": "dispatched",
+        "destination": "横浜市金沢区能見台3-5-2",
+        "station": "金沢消防署",
+        "heading": 200,
+        "speed": 40
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6443, 35.5333] },
+      "properties": {
+        "id": "V-09",
+        "name": "港北1-ポ1",
+        "type": "消防車",
+        "state": "standby",
+        "destination": "",
+        "station": "港北消防署",
+        "heading": 0,
+        "speed": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5733, 35.5263] },
+      "properties": {
+        "id": "V-10",
+        "name": "緑1-救1",
+        "type": "救急車",
+        "state": "standby",
+        "destination": "",
+        "station": "緑消防署",
+        "heading": 90,
+        "speed": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6390, 35.4475] },
+      "properties": {
+        "id": "V-11",
+        "name": "中1-は1",
+        "type": "はしご車",
+        "state": "dispatched",
+        "destination": "横浜市中区山下町12-4",
+        "station": "中消防署",
+        "heading": 135,
+        "speed": 30
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6218, 35.4558] },
+      "properties": {
+        "id": "V-12",
+        "name": "西1-ポ2",
+        "type": "消防車",
+        "state": "standby",
+        "destination": "",
+        "station": "西消防署",
+        "heading": 180,
+        "speed": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6208, 35.4248] },
+      "properties": {
+        "id": "V-13",
+        "name": "南1-救2",
+        "type": "救急車",
+        "state": "returning",
+        "destination": "",
+        "station": "南消防署",
+        "heading": 45,
+        "speed": 30
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6068, 35.3938] },
+      "properties": {
+        "id": "V-14",
+        "name": "港南1-救2",
+        "type": "救急車",
+        "state": "dispatched",
+        "destination": "横浜市港南区港南4-2-10",
+        "station": "港南消防署",
+        "heading": 270,
+        "speed": 45
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5937, 35.4618] },
+      "properties": {
+        "id": "V-15",
+        "name": "保土ケ谷1-救1",
+        "type": "救急車",
+        "state": "standby",
+        "destination": "",
+        "station": "保土ケ谷消防署",
+        "heading": 0,
+        "speed": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5677, 35.4728] },
+      "properties": {
+        "id": "V-16",
+        "name": "旭1-ポ2",
+        "type": "消防車",
+        "state": "standby",
+        "destination": "",
+        "station": "旭消防署",
+        "heading": 90,
+        "speed": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6373, 35.4028] },
+      "properties": {
+        "id": "V-17",
+        "name": "磯子1-は1",
+        "type": "はしご車",
+        "state": "standby",
+        "destination": "",
+        "station": "磯子消防署",
+        "heading": 0,
+        "speed": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6308, 35.3618] },
+      "properties": {
+        "id": "V-18",
+        "name": "金沢1-指1",
+        "type": "指揮車",
+        "state": "dispatched",
+        "destination": "横浜市金沢区六浦南2-7-1",
+        "station": "金沢消防署",
+        "heading": 225,
+        "speed": 60
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6438, 35.5328] },
+      "properties": {
+        "id": "V-19",
+        "name": "港北1-指1",
+        "type": "指揮車",
+        "state": "returning",
+        "destination": "",
+        "station": "港北消防署",
+        "heading": 180,
+        "speed": 40
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.5728, 35.5258] },
+      "properties": {
+        "id": "V-20",
+        "name": "緑1-ポ2",
+        "type": "消防車",
+        "state": "standby",
+        "destination": "",
+        "station": "緑消防署",
+        "heading": 270,
+        "speed": 0
+      }
+    }
+  ]
+}

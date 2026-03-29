@@ -10,6 +10,55 @@ body {
   overflow: hidden;
 }
 
+/* ---- 共通ナビゲーションバー ---- */
+
+#global-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: #1a1a2e;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  padding: 0 12px;
+}
+
+.nav-brand {
+  color: #a8b4f8;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding-right: 20px;
+  border-right: 1px solid rgba(255,255,255,0.15);
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.nav-link {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 0.82rem;
+  padding: 0 14px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.nav-link.active {
+  background: #4361ee;
+  color: #fff;
+}
+
 #map {
   position: absolute;
   inset: 0;

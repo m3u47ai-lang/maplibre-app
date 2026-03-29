@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>指令管制ビュー — 横浜市消防局</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      background: #0d0d1a;
+    }
+
+    /* ヘッダー */
+    #dispatch-header {
+      height: 52px;
+      margin-top: 40px; /* nav height */
+      background: #12122a;
+      border-bottom: 1px solid #2a2a4a;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 24px;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .header-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .header-stat-label {
+      font-size: 0.62rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    .header-stat-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      color: #e0e8ff;
+    }
+
+    .header-stat-value.red { color: #ff4444; }
+    .header-stat-value.green { color: #44cc88; }
+    .header-stat-value.orange { color: #ffaa44; }
+
+    .header-divider {
+      width: 1px;
+      height: 32px;
+      background: #2a2a4a;
+    }
+
+    #clock-display {
+      font-size: 1.3rem;
+      font-family: 'Courier New', monospace;
+      color: #c0d0ff;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    #hydrant-toggle-btn {
+      margin-left: auto;
+      padding: 6px 14px;
+      background: #1e2060;
+      border: 1px solid #4361ee;
+      color: #a0b0ff;
+      font-size: 0.78rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    #hydrant-toggle-btn.on {
+      background: #4361ee;
+      color: #fff;
+    }
+
+    #hydrant-toggle-btn:hover {
+      background: #3451d1;
+      color: #fff;
+    }
+
+    /* メインエリア */
+    #dispatch-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* 地図 */
+    #dispatch-map {
+      flex: 1;
+      position: relative;
+    }
+
+    /* 右パネル */
+    #dispatch-right {
+      width: 300px;
+      background: #0e0e22;
+      border-left: 1px solid #1e1e3a;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .right-section-header {
+      background: #16163a;
+      border-bottom: 1px solid #2a2a4a;
+      padding: 8px 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #8090c0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    /* 動態リスト */
+    #vehicle-list-section {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    #vehicle-list-body {
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .vehicle-row {
+      display: grid;
+      grid-template-columns: 64px 72px 1fr;
+      gap: 4px;
+      padding: 7px 12px;
+      border-bottom: 1px solid #1a1a30;
+      font-size: 0.78rem;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .vehicle-row:hover {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .vehicle-id {
+      font-family: monospace;
+      color: #8899bb;
+      font-size: 0.72rem;
+    }
+
+    .vehicle-name {
+      color: #c0d0f0;
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+
+    .v-status {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .v-status.standby  { background: #1a4030; color: #44cc88; }
+    .v-status.dispatched { background: #401010; color: #ff5555; }
+    .v-status.returning { background: #402800; color: #ffaa44; }
+
+    .vehicle-dest {
+      color: #6070a0;
+      font-size: 0.68rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      grid-column: 1 / -1;
+      padding-left: 0;
+      padding-top: 1px;
+    }
+
+    /* アラートパネル */
+    #alert-section {
+      flex-shrink: 0;
+      max-height: 200px;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid #2a2a4a;
+    }
+
+    #alert-list {
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .alert-row {
+      padding: 7px 12px;
+      border-bottom: 1px solid #1a1a30;
+      font-size: 0.75rem;
+    }
+
+    .alert-title {
+      color: #ff8844;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .alert-detail {
+      color: #7080a0;
+      font-size: 0.68rem;
+    }
+
+    .no-alerts {
+      padding: 16px 12px;
+      color: #44aa66;
+      font-size: 0.75rem;
+      text-align: center;
+    }
+
+    /* フッター：最新出動情報 */
+    #dispatch-footer {
+      height: 88px;
+      background: #0a0a1e;
+      border-top: 1px solid #1e1e3a;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .footer-header {
+      padding: 5px 14px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #5060a0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid #1a1a30;
+      flex-shrink: 0;
+    }
+
+    #incident-feed {
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .feed-item {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 3px 14px;
+      font-size: 0.72rem;
+      border-bottom: 1px solid #12122a;
+      animation: feedIn 0.4s ease;
+    }
+
+    @keyframes feedIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feed-time {
+      font-family: monospace;
+      color: #4060a0;
+      white-space: nowrap;
+      font-size: 0.68rem;
+    }
+
+    .feed-type {
+      padding: 0 5px;
+      border-radius: 3px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .feed-type.fire { background: #6a1010; color: #ff8888; }
+    .feed-type.ems  { background: #5a3800; color: #ffbb44; }
+    .feed-type.rescue { background: #0a305a; color: #44aaff; }
+
+    .feed-addr {
+      color: #8090c0;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .feed-unit {
+      color: #4060a0;
+      font-size: 0.68rem;
+      white-space: nowrap;
+    }
+
+    /* 凡例 */
+    #map-legend {
+      position: absolute;
+      bottom: 24px;
+      left: 10px;
+      background: rgba(10,10,30,0.88);
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.72rem;
+      color: #8090c0;
+      z-index: 10;
+    }
+
+    .legend-title {
+      font-weight: 700;
+      color: #a0b0d0;
+      margin-bottom: 6px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 共通ナビゲーション -->
+  <nav id="global-nav">
+    <span class="nav-brand">横浜市消防局 GIS</span>
+    <a href="index.html" class="nav-link">既存マップ</a>
+    <a href="dispatch.html" class="nav-link active">指令管制</a>
+    <a href="prevention.html" class="nav-link">予防管理</a>
+    <a href="dashboard.html" class="nav-link">ダッシュボード</a>
+  </nav>
+
+  <!-- ヘッダー -->
+  <div id="dispatch-header">
+    <div id="clock-display">--:--:--</div>
+    <div class="header-divider"></div>
+    <div class="header-stat">
+      <span class="header-stat-label">稼働車両</span>
+      <span class="header-stat-value green" id="stat-active">--</span>
+    </div>
+    <div class="header-stat">
+      <span class="header-stat-label">出動中</span>
+      <span class="header-stat-value red" id="stat-dispatched">--</span>
+    </div>
+    <div class="header-stat">
+      <span class="header-stat-label">帰署中</span>
+      <span class="header-stat-value orange" id="stat-returning">--</span>
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-stat">
+      <span class="header-stat-label">本日出動</span>
+      <span class="header-stat-value" id="stat-today">--</span>
+    </div>
+    <button id="hydrant-toggle-btn">消火栓 OFF</button>
+  </div>
+
+  <!-- メインエリア -->
+  <div id="dispatch-body">
+    <div id="dispatch-map">
+      <div id="map-legend">
+        <div class="legend-title">車両状態</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#44cc88"></div>待機中</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ff4444"></div>出動中</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ffaa44"></div>帰署中</div>
+      </div>
+    </div>
+
+    <div id="dispatch-right">
+      <!-- 動態リスト -->
+      <div id="vehicle-list-section">
+        <div class="right-section-header">
+          動態リスト
+          <span id="vehicle-count-badge" style="margin-left:auto;background:#1e2060;color:#8090f0;padding:1px 8px;border-radius:10px;font-size:0.68rem;">0台</span>
+        </div>
+        <div id="vehicle-list-body"></div>
+      </div>
+
+      <!-- アラートパネル -->
+      <div id="alert-section">
+        <div class="right-section-header" style="color:#ff8844;">
+          アラート
+          <span id="alert-count-badge" style="margin-left:auto;background:#401010;color:#ff6644;padding:1px 8px;border-radius:10px;font-size:0.68rem;">0件</span>
+        </div>
+        <div id="alert-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- フッター：最新出動情報 -->
+  <div id="dispatch-footer">
+    <div class="footer-header">最新出動情報</div>
+    <div id="incident-feed"></div>
+  </div>
+
+  <script>
+    // ---- 車両モックデータ ----
+    const DISPATCH_VEHICLES = [
+      { id:'V-01', name:'中1-ポ1',   type:'消防車', state:'standby',    lng:139.6382, lat:35.4480, heading:45,  speed:0,  station:'中消防署',     dest:'' },
+      { id:'V-02', name:'中1-救1',   type:'救急車', state:'dispatched', lng:139.6410, lat:35.4460, heading:270, speed:45, station:'中消防署',     dest:'横浜市中区山下町1-1' },
+      { id:'V-03', name:'中1-はし1', type:'はしご車',state:'standby',   lng:139.6355, lat:35.4490, heading:180, speed:0,  station:'中消防署',     dest:'' },
+      { id:'V-04', name:'西1-ポ1',   type:'消防車', state:'dispatched', lng:139.6250, lat:35.4540, heading:90,  speed:40, station:'西消防署',     dest:'横浜市西区北幸2-3' },
+      { id:'V-05', name:'西1-救1',   type:'救急車', state:'returning',  lng:139.6230, lat:35.4520, heading:135, speed:30, station:'西消防署',     dest:'' },
+      { id:'V-06', name:'中2-ポ1',   type:'消防車', state:'standby',    lng:139.6450, lat:35.4410, heading:0,   speed:0,  station:'中消防署',     dest:'' },
+      { id:'V-07', name:'南1-救1',   type:'救急車', state:'dispatched', lng:139.6220, lat:35.4260, heading:200, speed:50, station:'南消防署',     dest:'横浜市南区南太田3-5' },
+      { id:'V-08', name:'南1-ポ1',   type:'消防車', state:'standby',    lng:139.6210, lat:35.4250, heading:0,   speed:0,  station:'南消防署',     dest:'' },
+      { id:'V-09', name:'港南1-救1', type:'救急車', state:'standby',    lng:139.6080, lat:35.3950, heading:0,   speed:0,  station:'港南消防署',   dest:'' },
+      { id:'V-10', name:'港南1-ポ1', type:'消防車', state:'dispatched', lng:139.6060, lat:35.3940, heading:315, speed:35, station:'港南消防署',   dest:'横浜市港南区港南台4-2' },
+      { id:'V-11', name:'保土1-ポ1', type:'消防車', state:'standby',    lng:139.5940, lat:35.4620, heading:0,   speed:0,  station:'保土ケ谷消防署', dest:'' },
+      { id:'V-12', name:'保土1-救1', type:'救急車', state:'returning',  lng:139.5960, lat:35.4600, heading:90,  speed:25, station:'保土ケ谷消防署', dest:'' },
+      { id:'V-13', name:'旭1-ポ1',   type:'消防車', state:'standby',    lng:139.5680, lat:35.4730, heading:0,   speed:0,  station:'旭消防署',     dest:'' },
+      { id:'V-14', name:'旭1-救1',   type:'救急車', state:'dispatched', lng:139.5700, lat:35.4750, heading:45,  speed:42, station:'旭消防署',     dest:'横浜市旭区今宿西町2-1' },
+      { id:'V-15', name:'磯子1-ポ1', type:'消防車', state:'standby',    lng:139.6370, lat:35.4030, heading:0,   speed:0,  station:'磯子消防署',   dest:'' },
+      { id:'V-16', name:'磯子1-救1', type:'救急車', state:'standby',    lng:139.6380, lat:35.4020, heading:0,   speed:0,  station:'磯子消防署',   dest:'' },
+      { id:'V-17', name:'金沢1-ポ1', type:'消防車', state:'dispatched', lng:139.6300, lat:35.3630, heading:60,  speed:38, station:'金沢消防署',   dest:'横浜市金沢区六浦1-5' },
+      { id:'V-18', name:'金沢1-救1', type:'救急車', state:'standby',    lng:139.6310, lat:35.3620, heading:0,   speed:0,  station:'金沢消防署',   dest:'' },
+      { id:'V-19', name:'港北1-指1', type:'指揮車', state:'returning',  lng:139.6450, lat:35.5310, heading:180, speed:20, station:'港北消防署',   dest:'' },
+      { id:'V-20', name:'港北1-救1', type:'救急車', state:'standby',    lng:139.6440, lat:35.5330, heading:0,   speed:0,  station:'港北消防署',   dest:'' },
+    ];
+
+    // 出動フィード初期データ
+    const FEED_INIT = [
+      { time:'08:34', type:'fire',   addr:'横浜市中区山下町3-1',     unit:'中1-ポ1・中1-はし1' },
+      { time:'08:21', type:'ems',    addr:'横浜市西区北幸2-3-5',     unit:'西1-救1' },
+      { time:'08:09', type:'rescue', addr:'横浜市南区南太田3-5-2',   unit:'南1-救1・南1-ポ1' },
+      { time:'07:58', type:'ems',    addr:'横浜市港南区港南台4-2-1', unit:'港南1-救1' },
+      { time:'07:44', type:'fire',   addr:'横浜市旭区今宿西町2-1',   unit:'旭1-ポ1' },
+    ];
+
+    // ---- 地図初期化 ----
+    const map = new maplibregl.Map({
+      container: 'dispatch-map',
+      style: 'https://tile.openstreetmap.jp/styles/osm-bright/style.json',
+      center: [139.6380, 35.4437],
+      zoom: 12,
+    });
+
+    map.addControl(new maplibregl.NavigationControl(), 'top-left');
+    map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-right');
+
+    // ---- 車両状態コピー（位置更新用） ----
+    let vehicleState = DISPATCH_VEHICLES.map(v => ({ ...v }));
+
+    // ---- アイコン生成（状態別色） ----
+    function makeStateIcon(state) {
+      const colors = {
+        standby:    { fill: '#44cc88', stroke: '#1a4030' },
+        dispatched: { fill: '#ff4444', stroke: '#4a1010' },
+        returning:  { fill: '#ffaa44', stroke: '#4a2800' },
+      };
+      const c = colors[state] || { fill: '#888', stroke: '#333' };
+      const size = 36;
+      const canvas = document.createElement('canvas');
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+
+      // 外円
+      ctx.beginPath();
+      ctx.arc(size/2, size/2, size/2-2, 0, Math.PI*2);
+      ctx.fillStyle = c.fill;
+      ctx.fill();
+      ctx.strokeStyle = c.stroke;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // 矢印
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.moveTo(size/2, 5);
+      ctx.lineTo(size/2+6, 19);
+      ctx.lineTo(size/2+2.5, 19);
+      ctx.lineTo(size/2+2.5, 31);
+      ctx.lineTo(size/2-2.5, 31);
+      ctx.lineTo(size/2-2.5, 19);
+      ctx.lineTo(size/2-6, 19);
+      ctx.closePath();
+      ctx.fill();
+
+      return { width: size, height: size, data: ctx.getImageData(0,0,size,size).data };
+    }
+
+    // ---- GeoJSON生成 ----
+    function vehiclesGeoJSON() {
+      return {
+        type: 'FeatureCollection',
+        features: vehicleState.map(v => ({
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: [v.lng, v.lat] },
+          properties: { ...v },
+        })),
+      };
+    }
+
+    // ---- 車両位置シミュレーション（5秒ごと） ----
+    function simulateVehicles() {
+      vehicleState = vehicleState.map(v => {
+        if (v.state === 'standby') return v;
+        const rad = (v.heading * Math.PI) / 180;
+        const delta = 0.0002 + Math.random() * 0.0002;
+        return {
+          ...v,
+          lng: v.lng + Math.sin(rad) * delta,
+          lat: v.lat + Math.cos(rad) * delta,
+          heading: ((v.heading + (Math.random()-0.5)*15) % 360 + 360) % 360,
+        };
+      });
+      if (map.getSource('dispatch-vehicles')) {
+        map.getSource('dispatch-vehicles').setData(vehiclesGeoJSON());
+      }
+      updateVehicleList();
+      updateHeader();
+    }
+
+    // ---- 地図レイヤ初期化 ----
+    map.on('load', () => {
+      // アイコン登録
+      map.addImage('v-standby',    makeStateIcon('standby'));
+      map.addImage('v-dispatched', makeStateIcon('dispatched'));
+      map.addImage('v-returning',  makeStateIcon('returning'));
+
+      // 管轄区域
+      map.addSource('dispatch-districts', { type:'geojson', data:'data/districts.geojson' });
+      map.addLayer({
+        id: 'dist-fill',
+        type: 'fill',
+        source: 'dispatch-districts',
+        paint: { 'fill-color': ['get','color'], 'fill-opacity': 0.12 },
+      });
+      map.addLayer({
+        id: 'dist-line',
+        type: 'line',
+        source: 'dispatch-districts',
+        paint: { 'line-color': ['get','color'], 'line-width': 1.5, 'line-dasharray': [4,2] },
+      });
+
+      // 消火栓（デフォルトOFF）
+      map.addSource('dispatch-hydrants', { type:'geojson', data:'data/hydrants.geojson' });
+      map.addLayer({
+        id: 'dispatch-hydrants-layer',
+        type: 'circle',
+        source: 'dispatch-hydrants',
+        layout: { visibility: 'none' },
+        paint: {
+          'circle-radius': 5,
+          'circle-color': '#0077cc',
+          'circle-stroke-width': 1.5,
+          'circle-stroke-color': '#ffffff',
+        },
+      });
+
+      // 車両ソース
+      map.addSource('dispatch-vehicles', { type:'geojson', data: vehiclesGeoJSON() });
+      map.addLayer({
+        id: 'dispatch-vehicles-layer',
+        type: 'symbol',
+        source: 'dispatch-vehicles',
+        layout: {
+          'icon-image': ['match',['get','state'],
+            'standby','v-standby',
+            'dispatched','v-dispatched',
+            'returning','v-returning',
+            'v-standby'
+          ],
+          'icon-size': 0.8,
+          'icon-rotate': ['get','heading'],
+          'icon-rotation-alignment': 'map',
+          'icon-allow-overlap': true,
+          'icon-ignore-placement': true,
+          'text-field': ['get','name'],
+          'text-size': 10,
+          'text-offset': [0,1.6],
+          'text-anchor': 'top',
+          'text-allow-overlap': false,
+        },
+        paint: {
+          'text-color': '#c0d0f0',
+          'text-halo-color': '#0a0a20',
+          'text-halo-width': 2,
+        },
+      });
+
+      // ポップアップ
+      map.on('mouseenter','dispatch-vehicles-layer',() => { map.getCanvas().style.cursor='pointer'; });
+      map.on('mouseleave','dispatch-vehicles-layer',() => { map.getCanvas().style.cursor=''; });
+      map.on('click','dispatch-vehicles-layer',(e) => {
+        if (!e.features || !e.features[0]) return;
+        const p = e.features[0].properties;
+        const stateLabel = { standby:'待機中', dispatched:'出動中', returning:'帰署中' };
+        new maplibregl.Popup({ maxWidth:'220px' })
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <div class="popup-content">
+              <div class="popup-title">${p.name}</div>
+              <table class="popup-table">
+                <tr><th>種別</th><td>${p.type}</td></tr>
+                <tr><th>状態</th><td>${stateLabel[p.state]||p.state}</td></tr>
+                <tr><th>所属</th><td>${p.station}</td></tr>
+                ${p.dest ? `<tr><th>出動先</th><td>${p.dest}</td></tr>` : ''}
+                <tr><th>速度</th><td>${p.speed} km/h</td></tr>
+              </table>
+            </div>`)
+          .addTo(map);
+      });
+
+      // 初期更新
+      updateVehicleList();
+      updateHeader();
+      updateAlerts();
+      loadFeed();
+
+      // 5秒ごと更新
+      setInterval(simulateVehicles, 5000);
+    });
+
+    // ---- 消火栓トグル ----
+    let hydrantOn = false;
+    document.getElementById('hydrant-toggle-btn').addEventListener('click', () => {
+      hydrantOn = !hydrantOn;
+      const btn = document.getElementById('hydrant-toggle-btn');
+      if (map.getLayer('dispatch-hydrants-layer')) {
+        map.setLayoutProperty('dispatch-hydrants-layer','visibility', hydrantOn ? 'visible' : 'none');
+      }
+      btn.textContent = hydrantOn ? '消火栓 ON' : '消火栓 OFF';
+      btn.classList.toggle('on', hydrantOn);
+    });
+
+    // ---- 時計更新 ----
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock-display').textContent =
+        now.toLocaleTimeString('ja-JP', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // ---- ヘッダー統計更新 ----
+    let todayCount = 14;
+    function updateHeader() {
+      const dispatched = vehicleState.filter(v => v.state === 'dispatched').length;
+      const returning  = vehicleState.filter(v => v.state === 'returning').length;
+      const active     = vehicleState.length;
+      document.getElementById('stat-active').textContent     = active;
+      document.getElementById('stat-dispatched').textContent = dispatched;
+      document.getElementById('stat-returning').textContent  = returning;
+      document.getElementById('stat-today').textContent      = todayCount;
+    }
+
+    // ---- 動態リスト更新 ----
+    function updateVehicleList() {
+      const stateLabel = { standby:'待機中', dispatched:'出動中', returning:'帰署中' };
+      const stateClass = { standby:'standby', dispatched:'dispatched', returning:'returning' };
+      const body = document.getElementById('vehicle-list-body');
+      body.innerHTML = vehicleState.map(v => `
+        <div class="vehicle-row">
+          <span class="vehicle-id">${v.id}</span>
+          <span class="vehicle-name">${v.name}</span>
+          <span class="v-status ${stateClass[v.state]}">${stateLabel[v.state]}</span>
+          ${v.dest ? `<span class="vehicle-dest">${v.dest}</span>` : ''}
+        </div>`).join('');
+      document.getElementById('vehicle-count-badge').textContent = vehicleState.length + '台';
+    }
+
+    // ---- アラートパネル ----
+    function updateAlerts() {
+      const dispatched = vehicleState.filter(v => v.state === 'dispatched');
+      // 応答時間超過をランダムでシミュレート（出動中のうち一部）
+      const overdue = dispatched.filter((_, i) => i % 3 === 0);
+      const list = document.getElementById('alert-list');
+      const badge = document.getElementById('alert-count-badge');
+      badge.textContent = overdue.length + '件';
+
+      if (overdue.length === 0) {
+        list.innerHTML = '<div class="no-alerts">アラートなし</div>';
+      } else {
+        list.innerHTML = overdue.map(v => `
+          <div class="alert-row">
+            <div class="alert-title">応答時間超過: ${v.name}</div>
+            <div class="alert-detail">出動先: ${v.dest || '―'} / ${Math.floor(5+Math.random()*8)}分経過</div>
+          </div>`).join('');
+      }
+    }
+
+    // ---- 出動フィード ----
+    const typeLabel = { fire:'火災', ems:'救急', rescue:'救助' };
+    function loadFeed() {
+      const feed = document.getElementById('incident-feed');
+      feed.innerHTML = FEED_INIT.map(f => `
+        <div class="feed-item">
+          <span class="feed-time">${f.time}</span>
+          <span class="feed-type ${f.type}">${typeLabel[f.type]}</span>
+          <span class="feed-addr">${f.addr}</span>
+          <span class="feed-unit">${f.unit}</span>
+        </div>`).join('');
+    }
+
+    // ランダムな出動イベントを追加（デモ用）
+    setInterval(() => {
+      if (Math.random() > 0.3) return;
+      const types = ['fire','ems','rescue'];
+      const addrs = [
+        '横浜市中区本牧元町1-2','横浜市西区みなとみらい2-1',
+        '横浜市南区真金町1-5','横浜市港北区新横浜2-3',
+        '横浜市磯子区岡村5-8','横浜市金沢区泥亀2-10',
+      ];
+      const units = ['中1-ポ1','西1-救1','南1-救1・南1-ポ1','港北1-救1','磯子1-ポ1'];
+      const type = types[Math.floor(Math.random()*types.length)];
+      const addr = addrs[Math.floor(Math.random()*addrs.length)];
+      const unit = units[Math.floor(Math.random()*units.length)];
+      const now = new Date();
+      const time = now.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+      const feed = document.getElementById('incident-feed');
+      const item = document.createElement('div');
+      item.className = 'feed-item';
+      item.innerHTML = `
+        <span class="feed-time">${time}</span>
+        <span class="feed-type ${type}">${typeLabel[type]}</span>
+        <span class="feed-addr">${addr}</span>
+        <span class="feed-unit">${unit}</span>`;
+      feed.insertBefore(item, feed.firstChild);
+      if (feed.children.length > 20) feed.lastChild.remove();
+      todayCount++;
+      updateHeader();
+    }, 15000);
+  </script>
+</body>
+</html>
