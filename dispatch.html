@@ -311,6 +311,121 @@
       white-space: nowrap;
     }
 
+    /* ============================================================
+       モバイル対応 (≤767px) - 指令管制
+       ============================================================ */
+
+    /* ボトムタブバー（デスクトップでは非表示） */
+    #mob-tab-bar {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 56px;
+      background: #0e0e22;
+      border-top: 1px solid #2a2a4a;
+      z-index: 110;
+    }
+    .mob-tab {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      color: #4060a0;
+      font-size: 0.6rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      transition: color 0.15s, background 0.15s;
+      min-height: 44px;
+    }
+    .mob-tab:active { background: rgba(255,255,255,0.05); }
+    .mob-tab.active { color: #8090f0; }
+    .mob-tab-icon { font-size: 1.15rem; line-height: 1; }
+
+    /* ボトムシート (動態 / アラート / 出動フィード) */
+    #mob-sheet {
+      display: none;
+      position: fixed;
+      bottom: 56px; left: 0; right: 0;
+      height: 60vh;
+      background: #0e0e22;
+      border-top: 2px solid #4361ee;
+      border-radius: 16px 16px 0 0;
+      z-index: 105;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    #mob-sheet.open { transform: translateY(0); }
+
+    .mob-sheet-handle {
+      width: 40px; height: 4px;
+      background: #3a3a6a;
+      border-radius: 2px;
+      margin: 8px auto 0;
+      flex-shrink: 0;
+    }
+
+    /* シートオーバーレイ */
+    #mob-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 104;
+    }
+    #mob-overlay.open { display: block; }
+
+    /* モバイルフィードパネル */
+    #mob-feed-section {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    @media (max-width: 767px) {
+      /* 40px nav → 44px */
+      #dispatch-header {
+        margin-top: 44px;
+        height: auto;
+        min-height: 48px;
+        padding: 6px 10px;
+        gap: 10px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      .header-divider { height: 24px; flex-shrink: 0; }
+      .header-stat-value { font-size: 1rem; }
+      .header-stat-label { font-size: 0.56rem; }
+      #clock-display { font-size: 0.95rem; }
+      #hydrant-toggle-btn { font-size: 0.7rem; padding: 5px 9px; flex-shrink: 0; }
+
+      /* ボディ: 地図がフル */
+      #dispatch-body { position: relative; }
+      #dispatch-map { position: absolute; inset: 0; }
+
+      /* 右パネル → シートへ移動（非表示） */
+      #dispatch-right { display: none; }
+
+      /* フッターも非表示 */
+      #dispatch-footer { display: none; }
+
+      /* ボトムタブ表示 */
+      #mob-tab-bar { display: flex; }
+      #mob-sheet { display: flex; }
+
+      /* 凡例を上へ */
+      #map-legend { bottom: 68px; left: 8px; }
+
+      /* 消火栓ボタン：ヘッダー内で小さく */
+      #hydrant-toggle-btn { min-height: 36px; }
+    }
+
     /* 凡例 */
     #map-legend {
       position: absolute;
@@ -747,9 +862,139 @@
         <span class="feed-unit">${unit}</span>`;
       feed.insertBefore(item, feed.firstChild);
       if (feed.children.length > 20) feed.lastChild.remove();
+
+      // モバイル：フィードシートにも追加
+      const mobFeed = document.getElementById('mob-feed-body');
+      if (mobFeed) {
+        const mItem = item.cloneNode(true);
+        mobFeed.insertBefore(mItem, mobFeed.firstChild);
+        if (mobFeed.children.length > 20) mobFeed.lastChild.remove();
+      }
       todayCount++;
       updateHeader();
     }, 15000);
+
+    // ---- モバイル：ボトムタブ + シート ----
+    const mobSheet   = document.getElementById('mob-sheet');
+    const mobOverlay = document.getElementById('mob-overlay');
+
+    function openMobSheet(tabId) {
+      document.querySelectorAll('.mob-tab').forEach(t => t.classList.remove('active'));
+      const tab = document.getElementById(tabId);
+      if (tab) tab.classList.add('active');
+      // シートセクション切り替え
+      document.querySelectorAll('.mob-sheet-section').forEach(s => s.style.display = 'none');
+      const sectionId = {
+        'mob-tab-list':   'mob-vehicles-section',
+        'mob-tab-alert':  'mob-alerts-section',
+        'mob-tab-feed':   'mob-feed-section',
+      }[tabId];
+      if (sectionId) {
+        const sec = document.getElementById(sectionId);
+        if (sec) sec.style.display = 'flex';
+      }
+      mobSheet.classList.add('open');
+      mobOverlay.classList.add('open');
+    }
+
+    function closeMobSheet() {
+      mobSheet.classList.remove('open');
+      mobOverlay.classList.remove('open');
+      document.querySelectorAll('.mob-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('mob-tab-map')?.classList.add('active');
+    }
+
+    document.getElementById('mob-tab-map')?.addEventListener('click', closeMobSheet);
+    document.getElementById('mob-tab-list')?.addEventListener('click', () => {
+      openMobSheet('mob-tab-list');
+      syncMobVehicleList();
+    });
+    document.getElementById('mob-tab-alert')?.addEventListener('click', () => {
+      openMobSheet('mob-tab-alert');
+      syncMobAlerts();
+    });
+    document.getElementById('mob-tab-feed')?.addEventListener('click', () => {
+      openMobSheet('mob-tab-feed');
+      syncMobFeed();
+    });
+    mobOverlay?.addEventListener('click', closeMobSheet);
+
+    // シートを引き下げるスワイプ
+    let touchStartY = 0;
+    mobSheet?.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+    mobSheet?.addEventListener('touchend', e => {
+      if (e.changedTouches[0].clientY - touchStartY > 60) closeMobSheet();
+    }, { passive: true });
+
+    // 初期タブ
+    document.getElementById('mob-tab-map')?.classList.add('active');
+
+    // 動態リストをシートと同期
+    const origUpdateVehicleList = updateVehicleList;
+    function syncMobVehicleList() {
+      const mobBody = document.getElementById('mob-vehicle-body');
+      const src = document.getElementById('vehicle-list-body');
+      if (mobBody && src) mobBody.innerHTML = src.innerHTML;
+    }
+    // updateVehicleList が呼ばれるたびに同期
+    const _origUpdate = updateVehicleList;
+    window.updateVehicleList = function() {
+      _origUpdate();
+      syncMobVehicleList();
+    };
+
+    function syncMobAlerts() {
+      const mobAlerts = document.getElementById('mob-alert-body');
+      const src = document.getElementById('alert-list');
+      if (mobAlerts && src) mobAlerts.innerHTML = src.innerHTML;
+    }
+
+    function syncMobFeed() {
+      const mobFeed = document.getElementById('mob-feed-body');
+      const src = document.getElementById('incident-feed');
+      if (mobFeed && src) mobFeed.innerHTML = src.innerHTML;
+    }
   </script>
+
+  <!-- ===== モバイル：ボトムシート ===== -->
+  <div id="mob-overlay"></div>
+
+  <div id="mob-sheet">
+    <div class="mob-sheet-handle"></div>
+
+    <!-- 動態リストセクション -->
+    <div id="mob-vehicles-section" class="mob-sheet-section" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+      <div class="right-section-header">動態リスト</div>
+      <div id="mob-vehicle-body" style="overflow-y:auto;flex:1;"></div>
+    </div>
+
+    <!-- アラートセクション -->
+    <div id="mob-alerts-section" class="mob-sheet-section" style="display:none;flex-direction:column;flex:1;overflow:hidden;">
+      <div class="right-section-header" style="color:#ff8844;">アラート</div>
+      <div id="mob-alert-body" style="overflow-y:auto;flex:1;"></div>
+    </div>
+
+    <!-- 出動フィードセクション -->
+    <div id="mob-feed-section" class="mob-sheet-section" style="display:none;flex-direction:column;flex:1;overflow:hidden;">
+      <div class="footer-header" style="padding:8px 14px;flex-shrink:0;">最新出動情報</div>
+      <div id="mob-feed-body" style="overflow-y:auto;flex:1;"></div>
+    </div>
+  </div>
+
+  <!-- ===== モバイル：ボトムタブバー ===== -->
+  <div id="mob-tab-bar">
+    <button class="mob-tab active" id="mob-tab-map">
+      <span class="mob-tab-icon">🗺</span>地図
+    </button>
+    <button class="mob-tab" id="mob-tab-list">
+      <span class="mob-tab-icon">🚒</span>動態
+    </button>
+    <button class="mob-tab" id="mob-tab-alert">
+      <span class="mob-tab-icon">⚠️</span>アラート
+    </button>
+    <button class="mob-tab" id="mob-tab-feed">
+      <span class="mob-tab-icon">📋</span>出動
+    </button>
+  </div>
 </body>
 </html>

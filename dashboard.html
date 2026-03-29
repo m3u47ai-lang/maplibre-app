@@ -175,6 +175,77 @@
       flex-direction: column;
       overflow: hidden;
     }
+
+    /* ============================================================
+       モバイル対応 (≤767px) - ダッシュボード
+       ============================================================ */
+    @media (max-width: 767px) {
+      /* 縦スクロール可能なレイアウトに変更 */
+      body {
+        overflow: auto;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      #dashboard-header {
+        margin-top: 44px;
+        height: auto;
+        min-height: 44px;
+        padding: 8px 14px;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      #dashboard-header h1 { font-size: 0.82rem; }
+      #dashboard-header .dash-date { font-size: 0.72rem; margin-left: 0; }
+
+      #dashboard-body {
+        overflow: visible;
+        height: auto;
+        padding: 8px;
+        gap: 10px;
+      }
+
+      /* 上段：KPIを2列グリッドに、棒グラフを別行に */
+      #top-row {
+        flex-wrap: wrap;
+        height: auto;
+        gap: 8px;
+      }
+
+      .kpi-card {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 0;
+        padding: 12px 14px;
+      }
+      .kpi-value { font-size: 1.8rem; }
+      .kpi-label { font-size: 0.62rem; }
+      .kpi-sub   { font-size: 0.68rem; }
+      .kpi-icon  { font-size: 1.1rem; }
+
+      /* 棒グラフカードは全幅 */
+      .chart-card {
+        flex: 1 1 100%;
+        height: 220px;
+      }
+
+      /* 中段：縦スタック */
+      #mid-row {
+        flex-direction: column;
+        overflow: visible;
+        height: auto;
+      }
+
+      #map-card {
+        height: 300px;
+        flex: none;
+      }
+
+      #trend-card {
+        width: 100%;
+        height: 240px;
+        flex: none;
+      }
+    }
   </style>
 </head>
 <body>

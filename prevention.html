@@ -381,6 +381,140 @@
       font-size: 0.85rem;
       width: 100%;
     }
+
+    /* ============================================================
+       モバイル対応 (≤767px) - 予防管理
+       ============================================================ */
+
+    /* フローティングボタン群（デスクトップでは非表示） */
+    #mob-fab-row {
+      display: none;
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 10px;
+      z-index: 20;
+    }
+    .mob-fab {
+      padding: 10px 16px;
+      background: #1a1a2e;
+      color: #c0d0ff;
+      border: 1px solid #4361ee;
+      border-radius: 24px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      min-height: 44px;
+    }
+    .mob-fab:active { background: #4361ee; }
+
+    /* フィルタドロワー（モバイル用） */
+    #mob-filter-drawer {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 75vh;
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      border-top: 2px solid #4361ee;
+      z-index: 200;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      overflow: hidden;
+    }
+    #mob-filter-drawer.open { transform: translateY(0); }
+
+    /* テーブルドロワー（モバイル用） */
+    #mob-table-drawer {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 70vh;
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      border-top: 2px solid #4361ee;
+      z-index: 200;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      overflow: hidden;
+    }
+    #mob-table-drawer.open { transform: translateY(0); }
+
+    /* 詳細ドロワー（モバイル用） */
+    #mob-detail-drawer {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 65vh;
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      border-top: 2px solid #1a1a2e;
+      z-index: 200;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      overflow: hidden;
+    }
+    #mob-detail-drawer.open { transform: translateY(0); }
+
+    .mob-drawer-handle {
+      width: 40px; height: 4px;
+      background: #ccc;
+      border-radius: 2px;
+      margin: 10px auto 0;
+      flex-shrink: 0;
+    }
+    .mob-drawer-close {
+      position: absolute;
+      top: 10px; right: 14px;
+      background: #eee;
+      border: none;
+      border-radius: 50%;
+      width: 30px; height: 30px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ドロワーオーバーレイ */
+    #mob-prev-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 199;
+    }
+    #mob-prev-overlay.open { display: block; }
+
+    @media (max-width: 767px) {
+      /* 3カラムレイアウト → 地図のみ */
+      #filter-panel  { display: none; }
+      #detail-panel  { display: none; }
+      #attr-table-wrap { display: none; }
+      #prev-legend { display: none; }
+
+      #prev-main { margin-top: 44px; }
+      #prev-map-wrap { position: relative; }
+
+      /* FABを表示 */
+      #mob-fab-row { display: flex; }
+
+      /* ドロワーを表示可能に */
+      #mob-filter-drawer, #mob-table-drawer, #mob-detail-drawer { display: flex; }
+
+      /* ルートモーダル全画面化 */
+      #route-modal-inner {
+        min-width: unset;
+        width: calc(100vw - 32px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -834,6 +968,150 @@
     document.getElementById('inspect-btn').addEventListener('click', () => {
       alert('査察記録システムとの連携機能（実装予定）');
     });
+
+    // ---- モバイル：ドロワー制御 ----
+    const prevOverlay = document.getElementById('mob-prev-overlay');
+
+    function openDrawer(drawerId) {
+      closeAllDrawers();
+      document.getElementById(drawerId)?.classList.add('open');
+      prevOverlay.classList.add('open');
+    }
+    function closeAllDrawers() {
+      ['mob-filter-drawer','mob-table-drawer','mob-detail-drawer'].forEach(id => {
+        document.getElementById(id)?.classList.remove('open');
+      });
+      prevOverlay.classList.remove('open');
+    }
+    prevOverlay?.addEventListener('click', closeAllDrawers);
+
+    // スワイプで閉じる（各ドロワー）
+    ['mob-filter-drawer','mob-table-drawer','mob-detail-drawer'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      let sy = 0;
+      el.addEventListener('touchstart', e => { sy = e.touches[0].clientY; }, { passive: true });
+      el.addEventListener('touchend', e => {
+        if (e.changedTouches[0].clientY - sy > 60) closeAllDrawers();
+      }, { passive: true });
+    });
+
+    // FABのクリック
+    document.getElementById('mob-fab-filter')?.addEventListener('click', () => {
+      openDrawer('mob-filter-drawer');
+    });
+    document.getElementById('mob-fab-table')?.addEventListener('click', () => {
+      // テーブル内容をモバイル用に同期
+      const src = document.getElementById('attr-table-body');
+      const dst = document.getElementById('mob-attr-table-body');
+      if (src && dst) dst.innerHTML = src.innerHTML;
+      document.getElementById('mob-table-count').textContent =
+        document.getElementById('table-count').textContent;
+      openDrawer('mob-table-drawer');
+    });
+
+    // 閉じるボタン
+    document.querySelectorAll('.mob-drawer-close').forEach(btn => {
+      btn.addEventListener('click', closeAllDrawers);
+    });
+
+    // 地物クリック時にモバイルでは詳細ドロワーを開く
+    const _origShowDetail = showDetail;
+    window.showDetail = function(propsOrJson) {
+      _origShowDetail(propsOrJson);
+      if (window.innerWidth <= 767) {
+        // デスクトップ用パネルの内容をモバイルドロワーにコピー
+        const src = document.getElementById('detail-content');
+        const dst = document.getElementById('mob-detail-content');
+        if (src && dst) dst.innerHTML = src.innerHTML;
+        const srcBtn = document.getElementById('inspect-btn');
+        const dstBtn = document.getElementById('mob-inspect-btn');
+        if (srcBtn && dstBtn) dstBtn.style.display = srcBtn.style.display;
+        openDrawer('mob-detail-drawer');
+      }
+    };
+
+    // モバイル用フィルタはデスクトップのチェックボックスと同一DOM共有
+    // ドロワー内のフィルタボタン
+    document.getElementById('mob-filter-apply-btn')?.addEventListener('click', () => {
+      applyFilters();
+      closeAllDrawers();
+    });
+
+    document.getElementById('mob-inspect-btn')?.addEventListener('click', () => {
+      alert('査察記録システムとの連携機能（実装予定）');
+    });
   </script>
+
+  <!-- ===== モバイル：オーバーレイ ===== -->
+  <div id="mob-prev-overlay"></div>
+
+  <!-- ===== モバイル：地図上FAB ===== -->
+  <div id="mob-fab-row">
+    <button class="mob-fab" id="mob-fab-filter">☰ フィルタ</button>
+    <button class="mob-fab" id="mob-fab-table">📋 テーブル</button>
+  </div>
+
+  <!-- ===== モバイル：フィルタドロワー ===== -->
+  <div id="mob-filter-drawer">
+    <div class="mob-drawer-handle"></div>
+    <button class="mob-drawer-close" aria-label="閉じる">✕</button>
+    <div style="padding:14px 16px 0;font-size:0.85rem;font-weight:700;color:#1a1a2e;flex-shrink:0;">フィルタ条件</div>
+    <div style="flex:1;overflow-y:auto;padding:0 16px 16px;">
+      <div style="margin-top:12px;">
+        <div class="filter-section-title" style="font-size:0.7rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">対象種別</div>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="type-check" value="防火対象物" checked><span>防火対象物</span></label>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="type-check" value="危険物施設" checked><span>危険物施設</span></label>
+      </div>
+      <div style="margin-top:14px;">
+        <div class="filter-section-title" style="font-size:0.7rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">危険物種別</div>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="cat-check" value="第1類" checked><div style="width:10px;height:10px;border-radius:50%;background:#f4a261;flex-shrink:0;"></div><span>第1類</span></label>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="cat-check" value="第2類" checked><div style="width:10px;height:10px;border-radius:50%;background:#e9c46a;flex-shrink:0;"></div><span>第2類</span></label>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="cat-check" value="第3類" checked><div style="width:10px;height:10px;border-radius:50%;background:#2a9d8f;flex-shrink:0;"></div><span>第3類</span></label>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="cat-check" value="第4類" checked><div style="width:10px;height:10px;border-radius:50%;background:#e63946;flex-shrink:0;"></div><span>第4類（引火性）</span></label>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="cat-check" value="第5類" checked><div style="width:10px;height:10px;border-radius:50%;background:#9b5de5;flex-shrink:0;"></div><span>第5類</span></label>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="cat-check" value="第6類" checked><div style="width:10px;height:10px;border-radius:50%;background:#0077cc;flex-shrink:0;"></div><span>第6類</span></label>
+      </div>
+      <div style="margin-top:14px;">
+        <div class="filter-section-title" style="font-size:0.7rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">査察状況</div>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="status-check" value="正常" checked><span>正常</span></label>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="status-check" value="未実施" checked><span>未実施</span></label>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="status-check" value="期限超過" checked><span>期限超過</span></label>
+        <label class="filter-checkbox" style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;"><input type="checkbox" class="status-check" value="違反あり" checked><span>違反あり</span></label>
+      </div>
+    </div>
+    <div style="padding:12px 16px;flex-shrink:0;border-top:1px solid #eee;">
+      <button id="mob-filter-apply-btn" style="width:100%;padding:12px;background:#4361ee;color:#fff;border:none;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;">適用して閉じる</button>
+    </div>
+  </div>
+
+  <!-- ===== モバイル：テーブルドロワー ===== -->
+  <div id="mob-table-drawer">
+    <div class="mob-drawer-handle"></div>
+    <button class="mob-drawer-close" aria-label="閉じる">✕</button>
+    <div style="padding:12px 14px 0;font-size:0.72rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:0.05em;display:flex;align-items:center;gap:8px;flex-shrink:0;">
+      属性テーブル <span id="mob-table-count" style="background:#eef1fc;color:#4361ee;padding:1px 8px;border-radius:10px;font-size:0.68rem;margin-left:auto;"></span>
+    </div>
+    <div style="flex:1;overflow:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.76rem;">
+        <thead>
+          <tr>
+            <th style="background:#f0f2f8;color:#666;font-weight:600;padding:6px 10px;text-align:left;position:sticky;top:0;border-bottom:1px solid #dde0ea;white-space:nowrap;">施設名</th>
+            <th style="background:#f0f2f8;color:#666;font-weight:600;padding:6px 10px;text-align:left;position:sticky;top:0;border-bottom:1px solid #dde0ea;white-space:nowrap;">状況</th>
+          </tr>
+        </thead>
+        <tbody id="mob-attr-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== モバイル：詳細ドロワー ===== -->
+  <div id="mob-detail-drawer">
+    <div class="mob-drawer-handle"></div>
+    <button class="mob-drawer-close" aria-label="閉じる">✕</button>
+    <div style="padding:12px 14px 0 14px;font-size:0.82rem;font-weight:700;color:#1a1a2e;flex-shrink:0;">施設詳細</div>
+    <div id="mob-detail-content" style="padding:14px;overflow-y:auto;flex:1;font-size:0.85rem;color:#333;"></div>
+    <button id="mob-inspect-btn" style="display:none;margin:0 14px 14px;padding:12px;background:#e8f0fe;color:#4361ee;border:1px solid #c5d0f8;border-radius:8px;font-size:0.85rem;cursor:pointer;font-weight:600;">査察記録を表示</button>
+  </div>
 </body>
 </html>

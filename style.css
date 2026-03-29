@@ -809,3 +809,50 @@ button:disabled {
 .chart-wrap-sm {
   height: 180px;
 }
+
+/* ============================================================
+   モバイル共通レスポンシブ (≤767px)
+   ============================================================ */
+
+/* ナビゲーション：横スクロールタブ化 */
+@media (max-width: 767px) {
+  #global-nav {
+    height: 44px;
+    padding: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  #global-nav::-webkit-scrollbar { display: none; }
+
+  .nav-brand {
+    font-size: 0.72rem;
+    padding: 0 12px;
+    border-right: none;
+    margin-right: 0;
+    flex-shrink: 0;
+    color: #8090d0;
+  }
+
+  .nav-link {
+    font-size: 0.78rem;
+    padding: 0 16px;
+    height: 44px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
+/* ポップアップをモバイル用に広げる */
+@media (max-width: 767px) {
+  .maplibregl-popup-content {
+    font-size: 0.88rem !important;
+    max-width: calc(100vw - 40px) !important;
+  }
+
+  /* タッチ操作向け：ボタンの最小タップ領域 */
+  button {
+    min-height: 40px;
+  }
+}
