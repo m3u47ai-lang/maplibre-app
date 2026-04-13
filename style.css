@@ -61,16 +61,19 @@ body {
 
 #map {
   position: absolute;
-  inset: 0;
+  top: 40px; /* nav bar の下から開始 */
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 40px);
 }
 
 /* ---- 右側コントロールパネル ---- */
 
 #panel {
   position: absolute;
-  top: 16px;
+  top: 52px; /* nav(40) + gap(12) */
   right: 16px;
   width: 220px;
   background: rgba(255, 255, 255, 0.95);
@@ -81,6 +84,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
 }
 
 #panel h2 {
@@ -164,7 +169,7 @@ button:disabled {
 
 #layer-panel {
   position: absolute;
-  top: 100px; /* NavigationControl の下に配置 */
+  top: 160px; /* nav(40) + MapLibre controls(~110) + gap(10) */
   left: 10px;
   width: 196px;
   background: rgba(255, 255, 255, 0.95);
@@ -172,8 +177,9 @@ button:disabled {
   padding: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   z-index: 10;
-  max-height: calc(100vh - 200px);
+  max-height: calc(100vh - 240px);
   overflow-y: auto;
+  transition: left 0.3s ease;
 }
 
 #layer-panel h3 {
@@ -229,9 +235,9 @@ button:disabled {
 
 #search-bar {
   position: absolute;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 100px; /* vehicle-bar(52px) + その高さ(~40px) + gap(8px) */
+  left: 220px; /* layer-panel(196px) + gap(24) */
+  right: 252px; /* right-panel(220px) + margin(16) + gap(16) */
   display: flex;
   gap: 4px;
   z-index: 10;
@@ -239,9 +245,7 @@ button:disabled {
   border-radius: 24px;
   padding: 6px 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  min-width: 320px;
-  max-width: 480px;
-  width: calc(100vw - 520px); /* 両パネルと重ならないよう */
+  min-width: 200px;
 }
 
 #search-input {
@@ -378,8 +382,8 @@ button:disabled {
 
 #vehicle-bar {
   position: absolute;
-  top: 16px;
-  left: 216px; /* レイヤパネル右端より少し右 */
+  top: 52px; /* nav(40) + gap(12) */
+  left: 220px; /* layer-panel(196px) + gap(24) */
   z-index: 10;
   display: flex;
   align-items: center;
@@ -390,6 +394,8 @@ button:disabled {
   padding: 6px 12px;
   font-size: 0.78rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  max-width: calc(100vw - 500px); /* right-panel と重ならない */
+  overflow: hidden;
 }
 
 #vehicle-updated {
@@ -808,4 +814,156 @@ button:disabled {
 
 .chart-wrap-sm {
   height: 180px;
+}
+
+/* ---- モバイル用パネルトグルボタン ---- */
+
+.panel-toggle-btn {
+  display: none; /* デスクトップでは非表示 */
+  position: absolute;
+  top: 52px;
+  z-index: 30;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  align-items: center;
+  justify-content: center;
+  background: rgba(26,26,46,0.85);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+#layer-toggle-btn {
+  left: 8px;
+}
+
+.panel-toggle-right {
+  right: 8px;
+}
+
+/* ---- レスポンシブ: タブレット (≤ 900px) ---- */
+
+@media (max-width: 900px) {
+  #panel {
+    width: 200px;
+    right: 8px;
+  }
+
+  #vehicle-bar {
+    max-width: calc(100vw - 440px);
+  }
+
+  #search-bar {
+    left: 220px;
+    right: 220px;
+  }
+
+  #pickup-result {
+    left: 220px;
+    max-width: 220px;
+  }
+}
+
+/* ---- レスポンシブ: モバイル/スマホ (≤ 640px) ---- */
+
+@media (max-width: 640px) {
+  /* ナビはスクロール可能に */
+  #global-nav {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  #global-nav::-webkit-scrollbar { display: none; }
+
+  .nav-brand {
+    font-size: 0.72rem;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  .nav-link {
+    padding: 0 10px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  /* モバイルトグルボタン表示 */
+  .panel-toggle-btn {
+    display: flex;
+  }
+
+  /* 右パネル: デフォルト非表示、open クラスで表示 */
+  #panel {
+    right: -240px;
+    top: 40px;
+    border-radius: 10px 0 0 10px;
+    max-height: calc(100vh - 40px);
+    transition: right 0.3s ease;
+    z-index: 25;
+  }
+  #panel.open {
+    right: 0;
+  }
+
+  /* レイヤパネル: デフォルト非表示、open クラスで表示 */
+  #layer-panel {
+    left: -210px;
+    top: 40px;
+    border-radius: 0 10px 10px 0;
+    max-height: calc(100vh - 40px);
+    z-index: 25;
+  }
+  #layer-panel.open {
+    left: 0;
+  }
+
+  /* 検索バー: 全幅 */
+  #search-bar {
+    top: 52px;
+    left: 52px;  /* トグルボタン幅(36) + gap(16) */
+    right: 52px;
+    min-width: unset;
+  }
+
+  /* 動態バー: 検索バーの下 */
+  #vehicle-bar {
+    top: 100px;
+    left: 8px;
+    right: 8px;
+    max-width: unset;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    justify-content: space-between;
+  }
+
+  /* 分析ボタン: より小さく */
+  #analysis-btns {
+    bottom: 80px;
+    left: 8px;
+  }
+  #analysis-btns button {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  /* 計測ボタン */
+  #measure-btn {
+    bottom: 36px;
+    left: 8px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+
+  /* ピックアップ結果 */
+  #pickup-result {
+    left: 8px;
+    right: 8px;
+    max-width: unset;
+    bottom: 80px;
+  }
 }

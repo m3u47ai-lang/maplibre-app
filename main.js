@@ -89,6 +89,16 @@ function updateObstacleSummary() {
   }
 }
 
+// ---- モバイル: パネルトグルボタン ----
+document.getElementById('layer-toggle-btn').addEventListener('click', () => {
+  document.getElementById('layer-panel').classList.toggle('open');
+  document.getElementById('panel').classList.remove('open');
+});
+document.getElementById('panel-toggle-btn').addEventListener('click', () => {
+  document.getElementById('panel').classList.toggle('open');
+  document.getElementById('layer-panel').classList.remove('open');
+});
+
 // ---- 背景クリックでポップアップ（フィーチャーをクリックしていない場合のみ）----
 map.on('click', (e) => {
   // フィーチャークリックは layers.js 側で preventDefault() しているが、
