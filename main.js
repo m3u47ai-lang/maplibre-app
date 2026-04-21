@@ -1,7 +1,7 @@
 // ---- 初期設定 ----
 const INITIAL_CENTER = [139.6380, 35.4437]; // 横浜
 const INITIAL_ZOOM = 14;
-const INITIAL_STYLE = 'https://demotiles.maplibre.org/style.json';
+const INITIAL_STYLE = 'https://tile.openstreetmap.jp/styles/osm-bright/style.json';
 
 // ---- マップ初期化 ----
 const map = new maplibregl.Map({
