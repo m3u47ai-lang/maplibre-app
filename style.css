@@ -966,4 +966,214 @@ button:disabled {
     max-width: unset;
     bottom: 80px;
   }
+
+  /* 受信票パネル: モバイルでは全幅 */
+  #incident-list-panel {
+    right: 0;
+  }
+}
+
+/* ---- 受信票リストパネル（下部スライドアップ）---- */
+
+#incident-list-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 252px; /* right panel(220) + margin(16) + gap(16) */
+  background: rgba(20, 20, 38, 0.97);
+  color: #fff;
+  z-index: 20;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.45);
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+#incident-list-panel.collapsed {
+  transform: translateY(calc(100% - 48px));
+}
+
+#incident-list-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  user-select: none;
+  flex-wrap: wrap;
+  min-height: 48px;
+}
+
+#incident-list-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.urgent-count {
+  background: #c1121f;
+  color: #fff;
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  animation: urgentBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes urgentBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+
+#incident-list-stats {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.stat-chip {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.stat-urgent    { background: rgba(193,18,31,0.25); color: #ff6b72; border: 1px solid rgba(193,18,31,0.4); }
+.stat-responding { background: rgba(224,112,32,0.25); color: #ffaa60; border: 1px solid rgba(224,112,32,0.4); }
+.stat-done      { background: rgba(120,120,120,0.2); color: #aaa;    border: 1px solid rgba(120,120,120,0.35); }
+
+#incident-list-tabs {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.list-tab {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.65);
+  border: 1px solid rgba(255,255,255,0.12);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.list-tab:hover  { background: rgba(255,255,255,0.18); color: #fff; }
+.list-tab.active { background: #4361ee; color: #fff; border-color: #4361ee; }
+
+#incident-list-toggle {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+#incident-list-toggle:hover { background: rgba(255,255,255,0.2); color: #fff; }
+
+#incident-list-body {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  max-height: 168px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.incident-list-card {
+  flex-shrink: 0;
+  width: 196px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.incident-list-card:hover {
+  background: rgba(255,255,255,0.13);
+  border-color: rgba(255,255,255,0.28);
+  transform: translateY(-2px);
+}
+
+.incident-list-card.status-未対応 { border-left: 3px solid #c1121f; }
+.incident-list-card.status-対応中  { border-left: 3px solid #e07020; }
+.incident-list-card.status-完了    { border-left: 3px solid #555; opacity: 0.6; }
+
+.card-header-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-badge {
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.card-badge.火災   { background: #c1121f; }
+.card-badge.救急   { background: #e07020; }
+.card-badge.風水害 { background: #0077cc; }
+
+.card-subtype {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #e8e8f0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-address {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.55);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.card-elapsed {
+  font-size: 0.66rem;
+  color: rgba(255,255,255,0.4);
+  font-family: monospace;
+}
+
+.card-status-badge {
+  font-size: 0.63rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.card-status-badge.未対応 { background: rgba(193,18,31,0.35); color: #ff8080; }
+.card-status-badge.対応中  { background: rgba(224,112,32,0.35); color: #ffbb70; }
+.card-status-badge.完了    { background: rgba(100,100,100,0.3); color: #aaa; }
+
+.incident-list-empty {
+  color: rgba(255,255,255,0.35);
+  padding: 24px 0;
+  font-size: 0.82rem;
+  width: 100%;
+  text-align: center;
 }

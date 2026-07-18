@@ -64,6 +64,8 @@ function saveIncidents(incidents) {
 let incidents = loadIncidents();
 let incidentMap = null;
 let showCompleted = true;
+let incidentListFilter = 'all';
+let incidentListCollapsed = false;
 
 // ---- GeoJSON 生成 ----
 function incidentsToGeoJSON() {
@@ -130,7 +132,21 @@ function addIncidentLayers(map) {
     data: incidentsToGeoJSON(),
   });
 
-  // 未対応・対応中：点滅させるためにレイヤを2枚重ねる
+  // 未対応マーカーのパルスリング（シンボルの下に配置）
+  map.addLayer({
+    id: 'incidents-pulse',
+    type: 'circle',
+    source: 'incidents',
+    filter: ['==', ['get', 'status'], '未対応'],
+    paint: {
+      'circle-radius': 18,
+      'circle-color': 'transparent',
+      'circle-stroke-color': '#c1121f',
+      'circle-stroke-width': 2,
+      'circle-stroke-opacity': 0.7,
+    },
+  });
+
   map.addLayer({
     id: 'incidents-symbol',
     type: 'symbol',
@@ -277,6 +293,7 @@ function openIncidentModal(incId) {
 function updateIncidentLayer() {
   if (!incidentMap || !incidentMap.getSource('incidents')) return;
   incidentMap.getSource('incidents').setData(incidentsToGeoJSON());
+  renderIncidentList();
 }
 
 // ---- 完了事案トグル ----
@@ -297,12 +314,95 @@ function readdIncidentLayers() {
   }
 }
 
+// ---- 経過時間フォーマット ----
+function formatElapsed(reportedAt) {
+  const diffMs = Date.now() - new Date(reportedAt).getTime();
+  const diffMin = Math.floor(diffMs / 60000);
+  if (diffMin < 1)  return 'たった今';
+  if (diffMin < 60) return `${diffMin}分前`;
+  const diffH = Math.floor(diffMin / 60);
+  if (diffH < 24)   return `${diffH}時間前`;
+  return `${Math.floor(diffH / 24)}日前`;
+}
+
+// ---- 受信票リスト描画 ----
+function renderIncidentList() {
+  const body = document.getElementById('incident-list-body');
+  if (!body) return;
+
+  // ステータスカウント
+  const counts = { '未対応': 0, '対応中': 0, '完了': 0 };
+  incidents.forEach((i) => { if (counts[i.status] !== undefined) counts[i.status]++; });
+
+  document.getElementById('stat-mitatai').textContent = `未対応: ${counts['未対応']}`;
+  document.getElementById('stat-taiochu').textContent = `対応中: ${counts['対応中']}`;
+  document.getElementById('stat-kanryo').textContent  = `完了: ${counts['完了']}`;
+
+  const urgentEl = document.getElementById('incident-urgent-count');
+  if (urgentEl) {
+    const n = counts['未対応'];
+    urgentEl.textContent = `${n}件 要対応`;
+    urgentEl.style.display = n > 0 ? 'inline-block' : 'none';
+  }
+
+  // フィルタ＆優先度ソート: 未対応 → 対応中 → 完了
+  const priorityOrder = { '未対応': 0, '対応中': 1, '完了': 2 };
+  const filtered = incidents
+    .filter((i) => incidentListFilter === 'all' || i.status === incidentListFilter)
+    .sort((a, b) => {
+      const pd = priorityOrder[a.status] - priorityOrder[b.status];
+      return pd !== 0 ? pd : new Date(a.reportedAt) - new Date(b.reportedAt);
+    });
+
+  if (filtered.length === 0) {
+    body.innerHTML = '<div class="incident-list-empty">該当する受信票なし</div>';
+    return;
+  }
+
+  body.innerHTML = filtered.map((inc) => `
+    <div class="incident-list-card status-${inc.status}" data-id="${inc.id}">
+      <div class="card-header-row">
+        <span class="card-badge ${inc.type}">${inc.type}</span>
+        <span class="card-subtype">${inc.subtype}</span>
+      </div>
+      <div class="card-address">📍 ${inc.address}</div>
+      <div class="card-footer">
+        <span class="card-elapsed">${formatElapsed(inc.reportedAt)}</span>
+        <span class="card-status-badge ${inc.status}">${inc.status}</span>
+      </div>
+    </div>`).join('');
+
+  // クリック: flyTo + モーダル表示
+  body.querySelectorAll('.incident-list-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const inc = incidents.find((i) => i.id === card.dataset.id);
+      if (!inc || !incidentMap) return;
+      incidentMap.flyTo({ center: [inc.lng, inc.lat], zoom: 16, duration: 800 });
+      openIncidentModal(inc.id);
+    });
+  });
+}
+
 // ---- 公開初期化関数 ----
 function initIncidents(map) {
   incidentMap = map;
 
   createIncidentIcons(map);
   addIncidentLayers(map);
+
+  // 未対応マーカーのパルスアニメーション
+  let pulsePhase = 0;
+  function animatePulse() {
+    pulsePhase = (pulsePhase + 0.05) % (Math.PI * 2);
+    const radius = 16 + Math.sin(pulsePhase) * 7;
+    const opacity = 0.55 + Math.sin(pulsePhase) * 0.35;
+    if (map.getLayer('incidents-pulse')) {
+      map.setPaintProperty('incidents-pulse', 'circle-radius', radius);
+      map.setPaintProperty('incidents-pulse', 'circle-stroke-opacity', opacity);
+    }
+    requestAnimationFrame(animatePulse);
+  }
+  animatePulse();
 
   // モーダルの閉じるボタン
   document.getElementById('incident-modal-close')?.addEventListener('click', () => {
@@ -317,6 +417,40 @@ function initIncidents(map) {
 
   // 完了事案トグル
   document.getElementById('toggle-completed-btn')?.addEventListener('click', toggleCompleted);
+
+  // フィルタータブ
+  document.querySelectorAll('.list-tab').forEach((tab) => {
+    tab.addEventListener('click', (e) => {
+      e.stopPropagation();
+      incidentListFilter = tab.dataset.filter;
+      document.querySelectorAll('.list-tab').forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderIncidentList();
+    });
+  });
+
+  // パネル折りたたみ
+  const listPanel  = document.getElementById('incident-list-panel');
+  const listHeader = document.getElementById('incident-list-header');
+  const toggleBtn  = document.getElementById('incident-list-toggle');
+
+  function toggleListPanel() {
+    incidentListCollapsed = !incidentListCollapsed;
+    listPanel?.classList.toggle('collapsed', incidentListCollapsed);
+    if (toggleBtn) toggleBtn.textContent = incidentListCollapsed ? '▲' : '▼';
+  }
+
+  toggleBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleListPanel();
+  });
+  listHeader?.addEventListener('click', (e) => {
+    if (e.target.closest('.list-tab') || e.target === toggleBtn) return;
+    toggleListPanel();
+  });
+
+  // 初回リスト描画
+  renderIncidentList();
 
   map.on('styledata', readdIncidentLayers);
 }
