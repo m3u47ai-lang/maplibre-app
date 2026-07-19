@@ -95,6 +95,29 @@
     <button id="vehicle-polling-btn" class="active">⏸ 更新停止</button>
   </div>
 
+  <!-- 災害受信票リストパネル（下部スライドアップ）-->
+  <div id="incident-list-panel">
+    <div id="incident-list-header">
+      <div id="incident-list-title">
+        <span>受信票一覧</span>
+        <span id="incident-urgent-count" class="urgent-count" style="display:none;"></span>
+      </div>
+      <div id="incident-list-stats">
+        <span id="stat-mitatai" class="stat-chip stat-urgent">未対応: 0</span>
+        <span id="stat-taiochu" class="stat-chip stat-responding">対応中: 0</span>
+        <span id="stat-kanryo"  class="stat-chip stat-done">完了: 0</span>
+      </div>
+      <div id="incident-list-tabs">
+        <button class="list-tab active" data-filter="all">全て</button>
+        <button class="list-tab" data-filter="未対応">未対応</button>
+        <button class="list-tab" data-filter="対応中">対応中</button>
+        <button class="list-tab" data-filter="完了">完了</button>
+      </div>
+      <button id="incident-list-toggle" title="パネルを折りたたむ">▼</button>
+    </div>
+    <div id="incident-list-body"></div>
+  </div>
+
   <!-- 災害受信票モーダル -->
   <div id="incident-modal" style="display:none;">
     <div id="incident-modal-inner">
